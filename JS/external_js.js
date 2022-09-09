@@ -7,21 +7,20 @@ alert("Great! " + favColor + " is my favorite color too!");
 mermaidDuration = prompt("How many days did you have The Little Mermaid?");
 bearDuration = prompt("How many days did you have Brother Bear?");
 herculesDuration = prompt("How many days did you have Hercules?");
-costPerDay = 3;
 
 total = (mermaidDuration * 3) + (bearDuration * 3) + (herculesDuration * 3);
 alert("Your total is " + total);
 
 //FANG Pay Block
-gPay = 400;
-aPay = 380;
-fPay = 350;
+gPay = prompt("How much do you make per hour with Google?");
+aPay = prompt("How much do you make per hour with Amazon?");
+fPay = prompt("How much do you make per hour with Facebook?");
 
 fHours = prompt("How many hours did you work with Facebook this week?");
 gHours = prompt("How many hours did you work with Google this week?");
 aHours = prompt("How many hours did you work with Amazon this week?");
-total = (fHours * fPay) + (gHours * gPay) + (aHours * aPay);
 
+total = (fHours * fPay) + (gHours * gPay) + (aHours * aPay);
 alert("Your total pay this week is " + total);
 
 //Enrollment Block
