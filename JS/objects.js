@@ -14,28 +14,14 @@
     person.sayHello();
 
 
-    /** TODO:
-     * HEB has an offer for the shoppers that buy products amounting to
-     * more than $200. If a shopper spends more than $200, they get a 12%
-     * discount. Write a JS program, using conditionals, that logs to the
-     * browser, how much Ryan, Cameron and George need to pay. Your program will have to
-     * display a line with the name of the person, the amount before the
-     * discount, the discount, if any, and the amount after the discount.
-     *
-     * Uncomment the lines below to create an array of objects where each object
-     * represents one shopper. Use a foreach loop to iterate through the array,
-     * and console.log the relevant messages for each person
-     */
-
     var shoppers = [
         {name: 'Cameron', amount: 180},
         {name: 'Ryan', amount: 250},
         {name: 'George', amount: 320}
     ];
-
     shoppers.forEach(function(shopper, amount) {
         if (shopper.amount >= 200) {
-            console.log(`${shopper.name}'s total is ${shopper.amount}.  His discount is $${shopper.amount * .12}! His new title is now $${shopper.amount * .88}`)
+            console.log(`${shopper.name}'s total is ${shopper.amount}.  His discount is $${shopper.amount * .12}! His new total is now $${shopper.amount * .88}`)
             console.log("---")
         } else {
             console.log(`${shopper.name}'s total is: $${shopper.amount}.`)
@@ -89,23 +75,37 @@
             }
         },
     ];
-    console.log(books[0].author.firstName)
 
     books.forEach(function(book, index) {
         console.log(`Book # ${index + 1}`);
         console.log(`Title: ${book.title}`);
         console.log(`Author: ${book.author.firstName} ${book.author.lastName}`);
         console.log("---");
+
+        function createBook() {
+            let bookTitles = ["Breathe", "Preacher", "1984", "Extreme Ownership", "The Art of War"];
+            let bookAuthors = ["Rickson Gracie", "Garth Ennis", "George Orwell", "Jocko Willink", "Sun Tzu"]
+            let newLibrary = [];
+            let newBook = {};
+            for (let i = 0; i < bookTitles.length; i++) {
+                newBook.title = (bookTitles[i]);
+                //newBook.author(bookAuthors[i]);
+            }
+            console.log(newBook)
+        }
+        createBook();
+        // console.log("Book # " + (i + 1));
+        // console.log(bookTitles[i]);
+        // console.log(bookAuthors[i]);
+        // console.log("---");
+
+
+        function showBookInfo() {
+
+        }
+
     });
-
-
-
     /**
-     * Bonus:
-     * - Create a function named `createBook` that accepts a title and author
-     *   name and returns a book object with the properties described
-     *   previously. Refactor your code that creates the books array to instead
-     *   use your function.
      * - Create a function named `showBookInfo` that accepts a book object and
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
