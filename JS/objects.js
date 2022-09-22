@@ -19,7 +19,7 @@
         {name: 'Ryan', amount: 250},
         {name: 'George', amount: 320}
     ];
-    shoppers.forEach(function(shopper, amount) {
+    shoppers.forEach(function(shopper) {
         if (shopper.amount >= 200) {
             console.log(`${shopper.name}'s total is ${shopper.amount}.  His discount is $${shopper.amount * .12}! His new total is now $${shopper.amount * .88}`)
             console.log("---")

@@ -32,26 +32,15 @@ let libraryArr = [
     },
     {
         author: "Suzanne Collins",
-        title: "Mockingjay:",
+        title: "Mockingjay",
         readingStatus: false
     }
 ]
 
-function findingAllRead(arr) {
-    let readBooks = arr.filter(book => book.readingStatus === true);
-    console.log(readBooks);
-    readBooks.forEach(readBook => {
-        for (let key in readBook) {
-            console.log(`${key}: ${readBook[key]}`)
-        }
+function findingAllRead(libraryArr) {
+    libraryArr.forEach(function(book) {
+        console.log(`It is ${book.readingStatus} that the book '${book.title}' by ${book.author} as already been read`)
+
     })
-    for (let i = 0; i < readBooks.length; i++) {
-        console.log(`${this.title} by ${this.author} has already been read.`)
-    }
-    let unreadBooks = arr.filter(book => book.readingStatus === false);
-    console.log(unreadBooks);
-    for (let i = 0; i < unreadBooks.length; i++) {
-        console.log(`${this.title} by ${this.author} has not been read.`)
-}
 }
 findingAllRead(libraryArr)
