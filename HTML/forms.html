@@ -6,15 +6,56 @@
 </head>
 <body>
 
-<form>
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" placeholder="Enter your username">
+<form method="POST" action="https://request-inspector.glitch.me/">
+    <!--Login div-->
+    <div>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="Enter your username">
+        <br>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Enter your password">
+
+        <input type="submit">
+    </div>
     <br>
 
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" placeholder="Enter your password">
+    <!--Textarea div-->
+    <div>
+        <label for="textarea">
+            <textarea name="bio" id="textarea" placeholder="Describe yourself"></textarea>
+        </label>
+    </div>
+    <br>
+
+    <!--Ad div-->
+    <div>
+        <label for="billboard">Billboard</label>
+        <input type="radio" id="billboard" value="billboard"><br>
+
+        <label for="Radio Ad">Radio Advertisement</label>
+        <input type="radio" id="Radio Ad" value="radio advertisement"><br>
+
+        <label for="Internet Ad">Internet Advertisement</label>
+        <input type="radio" id="Internet Ad" value="internet advertisement"><br>
+
+        <label for="Other">Other</label>
+        <input type="radio" id="Other" value="other"><br>
+    </div>
+    <br>
+
+    <!--Browser div-->
+    <div>
+        <label for="active_browser">What browser are you using?</label>
+        <select name="active_browser" id="active_browser">
+            <option value="chrome">Chrome</option>
+            <option value="firefox">Firefox</option>
+            <option value="safari">Safari</option>
+        </select>
+    </div>
+    <br>
 </form>
 
-<textarea name="bio" placeholder="Describe yourself"></textarea>
+
 </body>
 </html>
