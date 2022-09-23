@@ -1,6 +1,14 @@
 
-// radius: 3,
-//     getArea: function () {
-//     return Math.PI * (Math.pow(this.radius, 2));
-console.log("Area of a circle with R: 3 = " + Math.PI * (Math.pow(3, 2)))
-console.log("Area of a circle with R: 5 = " + Math.PI * (Math.pow(5, 2)))
+
+
+
+
+console.log(parseInt())
+console.log(typeof(Number(-5)));
+console.log(typeof(Number("5")));
+console.log(typeof(Number([1, 2, 3])));
+console.log(typeof(Number("texas")));
+console.log(typeof(Number(true)));
+console.log(typeof(Number(null)));
+
+
