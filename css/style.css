@@ -1,4 +1,49 @@
-
+body{
+    background-color: bisque;
+    background-image: url("https://i0.wp.com/haruspis.blog/wp-content/uploads/2020/08/artofcrop.jpg?fit=1900%2C1000&ssl=1");
+    font-family: bungee spice;
+}
 .fancy-header{
     color: purple;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    color: brown;
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: circle;
+}
+
+ol {
+    list-style-type: upper-roman;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+th, td {
+    text-align: center;
+    padding: 20px;
+    background-color: black;
+}
+
+a:link {
+    background-color: black;
+    padding: 4px;
+}
+a:visited {
+
+}
+a:hover {
+    background-color: white;
+}
+a:active {
+    background-color: green;
 }

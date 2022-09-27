@@ -28,3 +28,22 @@ em {
 a.article {
     float:right;
 }
+
+a:link {
+    background-color: darkkhaki;
+    transition: 0.3s;
+}
+
+a:hover {
+    background-color: darkblue;
+    color: orange;
+    font-size: 25px;
+}
+
+a:active {
+    background-color: red;
+}
+
+a:visited {
+    background-color: yellow;
+}
