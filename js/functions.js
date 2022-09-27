@@ -4,32 +4,32 @@
 function sayHello(name) {
     return("Hello, " + name + "!");
 }
-alert(sayHello("Hector"));
+console.log(sayHello("Hector"));
 
 
 // sayHello string literal
 let helloMessage = sayHello("Hector");
-alert(helloMessage);
+console.log(helloMessage);
+
 
 // myName variable
-let myName = "Hector (from myName variable)";
-alert(sayHello(myName));
+let myName = "Hector";
+console.log(sayHello(myName));
 
 
 //isTwo function
-function isTwo(random) {
-    var random = Math.floor((Math.random() * 3) + 1);
-    alert("Random num is " + random);
-    alert(random == 2);
+var random = Math.floor((Math.random() * 3) + 1);
+function isTwo(num) {
+    return num ==2;
 }
-isTwo();
+console.log(isTwo(random));
 
 
 //calculateTip function
 function calculateTip(tipPercent,billTotal) {
     return (billTotal * tipPercent);
 }
-alert(calculateTip(0.15, 33.42));
+console.log((calculateTip(0.15, 33.42)));
 
 
 //calculateTip function with prompts & alerts
@@ -44,4 +44,4 @@ function applyDiscount(price, discountPercentage) {
     let discountedPrice = price - discount;
     return discountedPrice;
 }
-alert(applyDiscount(45.99, .12));
+console.log(applyDiscount(45.99, .12));
