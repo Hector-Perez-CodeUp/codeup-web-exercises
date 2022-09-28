@@ -1,16 +1,12 @@
 (function(){
     "use strict";
 
-    var planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
-    let planetsString = "Mercury|Venus|Earth|Mars|Jupiter|Saturn|Uranus|Neptune";
-    let planetsArray = planetsString.split('|');
-    console.log(planetsArray);
-
+    var planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"];
+    console.log(planets);
 
     // Add "The Sun" to beginning of Planets
-    planets.unshift("The Sun");
     console.log("Adding 'The Sun' to the beginning of the planets array.");
-    console.log(planets);
+    console.log(planets.unshift("The Sun"));
 
 
     // Add "Pluto" to the end of Planets
@@ -46,12 +42,4 @@
     planets.sort();
     console.log("Sorting the planets array.");
     console.log(planets);
-
-    //
-    let brString = "Mercury<br>Venus<br>Earth<br>Mars<br>Jupiter<br>Saturn<br>Uranus<br>Neptune";
-    console.log(brString);
-
-    let ulString = "<ul><li>Mercury</li><li>Venus</li><li>Earth</li><li>Mars</li><li>Jupiter</li>Saturn</li><li>Uranus</li>Neptune</li></ul>"
-    console.log(ulString)
-
 })();

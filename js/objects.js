@@ -1,19 +1,21 @@
 (function() {
     "use strict";
 
-
+    // First Name Last Name Values
     let person = {
         firstName: "Hector",
         lastName: "Perez"
     }
 
 
+    // sayHello function
     person.sayHello = function() {
-        console.log(`Hello from ${person.firstName} ${person.lastName}!`)
+        return(`Hello from ${person.firstName} ${person.lastName}!`)
     }
-    person.sayHello();
+    console.log(person.sayHello());
 
 
+    // Shoppers Discounts
     var shoppers = [
         {name: 'Cameron', amount: 180},
         {name: 'Ryan', amount: 250},
@@ -21,16 +23,16 @@
     ];
     shoppers.forEach(function(shopper) {
         if (shopper.amount >= 200) {
-            console.log(`${shopper.name}'s total is ${shopper.amount}.  His discount is $${shopper.amount * .12}! His new total is now $${shopper.amount * .88}`)
+            console.log(`${shopper.name}: Pre-Discount Total = $${shopper.amount}.  Discount = $${shopper.amount * .12}.  Discounted Total = $${shopper.amount * .88}`)
             console.log("---")
         } else {
-            console.log(`${shopper.name}'s total is: $${shopper.amount}.`)
-            console.log(`${shopper.name} would have to spend $${200 - shopper.amount} to get a discount.`)
+            console.log(`${shopper.name}: Pre-Discount Total = $${shopper.amount}.  Discount = $0.  Discounted Total = $${shopper.amount}`)
             console.log("---")
         }
     })
 
 
+    // Books Array of Objects
     let books = [
         {
             title: "Breathe",
@@ -76,39 +78,13 @@
         },
     ];
 
+
+    // Loop through Books Array
     books.forEach(function(book, index) {
         console.log(`Book # ${index + 1}`);
         console.log(`Title: ${book.title}`);
         console.log(`Author: ${book.author.firstName} ${book.author.lastName}`);
         console.log("---");
 
-        function createBook() {
-            let bookTitles = ["Breathe", "Preacher", "1984", "Extreme Ownership", "The Art of War"];
-            let bookAuthors = ["Rickson Gracie", "Garth Ennis", "George Orwell", "Jocko Willink", "Sun Tzu"]
-            let newLibrary = [];
-            let newBook = {};
-            for (let i = 0; i < bookTitles.length; i++) {
-                newBook.title = (bookTitles[i]);
-                //newBook.author(bookAuthors[i]);
-            }
-            console.log(newBook)
-        }
-        createBook();
-        // console.log("Book # " + (i + 1));
-        // console.log(bookTitles[i]);
-        // console.log(bookAuthors[i]);
-        // console.log("---");
-
-
-        function showBookInfo() {
-
-        }
-
     });
-    /**
-     * - Create a function named `showBookInfo` that accepts a book object and
-     *   outputs the information described above. Refactor your loop to use your
-     *   `showBookInfo` function.
-     */
-
 })();
