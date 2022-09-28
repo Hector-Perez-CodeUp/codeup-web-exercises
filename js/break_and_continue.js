@@ -3,10 +3,11 @@ while (true) {
     let number = prompt("Input an odd number between 1 and 50");
     if (number % 2 == 0) {
         alert("Invalid input.  " + number + " is an even number.");
+        break;
+    } else {
+        alert("Your odd number is: " + number);
         continue;
     }
-    alert("Your odd number is: " + number);
-    break;
 }
 
 let number = prompt("Input an odd number between 1 and 50");
