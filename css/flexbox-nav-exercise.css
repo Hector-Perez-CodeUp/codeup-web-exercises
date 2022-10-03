@@ -2,6 +2,7 @@
 
 nav {
     background: gray;
+
 }
 
 ul {
@@ -15,9 +16,10 @@ ul {
 nav a {
     text-decoration: none;
     color: black;
-    font-family: Verdana;
+    font-family: "work sans";
     display: inline-block;
     padding: 1em;
+    font-weight: bold;
 }
 
 nav a:hover {
@@ -28,10 +30,11 @@ img {
     height: 2em;
 }
 
-/*link text, the logo, and icons are surrounded by anchor tags*/
-/*clickable area of links immediately flow from one link to the next (padding will help achieve this)*/
-/*Google Fonts used for logo and link text ("Montserrat" and "Work Sans", respectively)*/
+.logo {
+    font-size: 3em;
+    padding: .2em;
+    font-family: Montserrat;
+
+}
 /*the "Logo" text is 3em with .2em of padding above and below*/
-/*                              no explicit height given to the navbar*/
-/*                              default styling is removed as needed from the body, unordered list and anchor tag elements*/
 /*logo is horizontally centered on the navbar (automatic margins will help achieve this)*/
