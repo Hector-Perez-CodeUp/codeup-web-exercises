@@ -5,19 +5,22 @@ body {
     flex-direction: column;
 }
 
+.sub-section {
+    font-style: italic;
+}
+
 .alert-info a {
     display: flex;
-    padding: 1.3em;
-    width: 100%;
-    height: 10vh;
     justify-content: center;
     align-items: center;
+    padding: 1.5em;
+    width: 100%;
+    height: 2em;
     background-color: lightblue;
     border: 1px solid gray;
     text-decoration: none;
     color: black;
 }
-
 
 h1 {
     font-size: 3em;
@@ -31,21 +34,10 @@ img {
 .nav-links {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     margin: 0;
     padding: 0;
     list-style-type: none;
-}
-
-.sub-section {
-    font-style: italic;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 ul li {
@@ -56,7 +48,6 @@ ul li {
     margin-bottom: .5em;
     padding: 1em;
 }
-
 
 @media screen and (min-width: 768px) {
     .alert-info {
