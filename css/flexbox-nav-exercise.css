@@ -1,16 +1,26 @@
-* {box-sizing: border-box;}
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+}
 
 nav {
     background: gray;
-
 }
 
 ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    list-style-type: none;
+}
+
+nav ul {
     display: flex;
+    justify-content: center;
     align-items: center;
+}
+
+nav ul li:nth-of-type(5) {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 nav a {
@@ -18,7 +28,6 @@ nav a {
     color: black;
     font-family: "work sans";
     display: inline-block;
-    padding: 1em;
     font-weight: bold;
 }
 
@@ -30,11 +39,30 @@ img {
     height: 2em;
 }
 
-.logo {
+nav .logo {
     font-size: 3em;
     padding: .2em;
-    font-family: Montserrat;
+}
 
+.wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+#left-wrapper {
+    justify-content: start;
+}
+
+#right-wrapper {
+    justify-content: end;
+}
+.space-left {
+    padding-left: 1em;
+}
+
+.space-right {
+    padding-right: 1em;
 }
 /*the "Logo" text is 3em with .2em of padding above and below*/
 /*logo is horizontally centered on the navbar (automatic margins will help achieve this)*/
