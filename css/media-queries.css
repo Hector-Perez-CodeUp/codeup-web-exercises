@@ -96,4 +96,10 @@ ul li {
     .sub-section {
         flex-basis: 40%;
     }
+
+    .header-img {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
 }
