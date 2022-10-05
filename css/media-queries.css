@@ -53,4 +53,47 @@ ul li {
     .alert-info {
         display: none;
     }
+
+    footer {
+        margin-bottom: 2em;
+    }
+
+    body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    h1 {
+        margin: .2em 0 .5em 0;
+    }
+
+    nav {
+        margin: .8em 0 .5em auto;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+    }
+
+    ul li {
+        background: white;
+        display: flex;
+        justify-content: center;
+        margin-bottom: .5em;
+        padding: 1em;
+    }
+
+    section {
+        padding: .7em;
+    }
+
+    .main {
+        flex-basis: 60%;
+    }
+
+    .sub-section {
+        flex-basis: 40%;
+    }
 }
