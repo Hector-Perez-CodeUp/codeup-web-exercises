@@ -1,0 +1,10 @@
+.jumbotron {
+    background-image: url("/img/pizza.png"); /* Why is there two images? */
+    height: 346px;
+    background-size: cover;
+}
+
+.display-4 {
+    background: white; /* need to center and expand white to entire screen */
+}
+
