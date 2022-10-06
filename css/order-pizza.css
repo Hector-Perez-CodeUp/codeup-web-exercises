@@ -2,6 +2,15 @@
     background-image: url("/img/pizza.png"); /* Why is there two images? */
     height: 346px;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jumbotron>h1 {
+    text-align: center;
+    width: 100%;
+    background: rgba(255, 255, 255, .6);
 }
 
 .display-4 {

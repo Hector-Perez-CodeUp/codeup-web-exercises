@@ -24,59 +24,58 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Menu</a>
         </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Zip Code" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search stores near you!</button>
-      </form>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
-            <img src="img/person-fill.svg">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Sign Up!</a>
+        <li>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Zip Code" aria-label="Search">
+            <button class="btn btn-outline-primary text-nowrap" type="submit">Search stores near you!</button>
+          </form>
         </li>
       </ul>
     </div>
+      <a class="nav-link active" aria-current="page" href="#">
+        <img src="img/person-fill.svg">
+      </a>
+      <a class="nav-link active" aria-current="page" href="#">Sign Up!</a>
   </div>
 </nav>
 
 <div class="container">
   <!-- jumbotron -->
   <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <div class="opacity-75">
-          <h1 class="display-4">Welcome to Pizza World!</h1>
-        </div>
-    </div>
+    <h1 class="display-4">Welcome to Pizza World!</h1>
   </div>
   <h2>Build your own pizza!</h2> <!-- need to margin above -->
 
   <!-- Tabs -->
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+      <button class="nav-link active" id="size-and-crust" data-bs-toggle="tab" data-bs-target="#size-and-crust" type="button" role="tab" aria-controls="size-and-crust" aria-selected="true">
         <span class="badge bg-secondary">1</span>Size and Crust <!-- need to space from title -->
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+      <button class="nav-link" id="cheese-and-sauce" data-bs-toggle="tab" data-bs-target="#cheese-and-sauce" type="button" role="tab" aria-controls="cheese-and-sauce" aria-selected="false">
         <span class="badge bg-secondary">2</span>Cheese and Sauce <!-- need to space from title -->
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
+      <button class="nav-link" id="toppings" data-bs-toggle="tab" data-bs-target="#toppings" type="button" role="tab" aria-controls="toppings" aria-selected="false">
         <span class="badge bg-secondary">3</span>Toppings <!-- need to space from title -->
       </button>
     </li>
   </ul>
 
+  <!-- Tab Panes -->
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="size-and-crust">...</div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="cheese-and-sauce">...</div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="toppings">...</div>
+  </div>
+
   <!-- Size and Crust Card -->
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Choose Size and Crust</h5>
+      <h5 class="card-title p-3 mb-2 mt-0 ml-0 mr-0 bg-primary text-white">Choose Size and Crust</h5>
       <p class="card-text">Garlic seasoned crust with a rich, buttery taste.</p>
 
       <!-- Hand Tossed Sub-Card -->
