@@ -26,45 +26,60 @@
     culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
+<!--Buttons-->
+<button id="btn-1">Change Main Header</button>
+<button id="btn-2">Turn Sub-Header Blue</button>
+<button id="btn-3">Set dbId = 1 to Blue</button>
+<button id="btn-4">Set Every Other List Item Blue</button>
 <script>
     (function() {
         "use strict";
+
         // Main Header
         var mainHeader = document.getElementById("main-header");
-        console.log("The main header is " + mainHeader);
-
         // Modify innerHTML of Main Header
-        mainHeader.innerHTML = "Javascript is Cool";
+        let changeMainHeader = function() {
+            mainHeader.innerHTML = "Javascript is Cool";
+        }
+        //  Header Event
+        document.getElementById("btn-1").addEventListener("click", changeMainHeader);
+
+        // ---- //
 
         // Sub-Header
         var subHeader = document.getElementById("sub-header");
-        console.log("The subheader is " + subHeader);
-
         // Turn Sub-Header Blue
-        subHeader.style.color = "blue";
+        let changeSubHeading = function () {
+            subHeader.style.color = "blue";
+        }
+        // Sub-Header Event
+        document.getElementById("btn-2").addEventListener("click", changeSubHeading);
 
-        // List Items grouped into listItems
-        var listItems = document.getElementsByTagName("li");
-        console.log(listItems);
+        // ---- //
 
-        // Every Other Items Set To grey & li with dbId = 1 set to blue
-        for (let i = 0; i < listItems.length; i++) {
-            let dbId = listItems[i].getAttribute("data-dbid");
-            if (dbId == 1) {
-                listItems[i].style.color = "blue";
-            } else if (i % 2 == 0) {
-                listItems[i].style.color = "grey";
+        // Change dbId=1 Event
+        let listItems = document.getElementsByTagName("li");
+        let changedbId = function() {
+            for (let i = 0; i < listItems.length; i++) {
+                let dbId = listItems[i].getAttribute("data-dbid");
+                if (dbId == 1) {
+                    listItems[i].style.color = "blue";
+                }
             }
         }
+        document.getElementById("btn-3").addEventListener("click", changedbId);
 
+        // ---- //
 
-        // Grabbed all 'sub-paragraph' elements
-        var subParagraphs = document.getElementsByClassName("sub-paragraph");
-        console.log(subParagraphs);
-
-        // First sub-paragraph to "Mission Accomplished!"
-        subParagraphs[0].innerText = "Mission Accomplished!";
-        console.log(subParagraphs);
+        // Change Every Other List Item Event
+        let changeListItems = function() {
+            for (let i = 0; i < listItems.length; i++) {
+                if (i % 2 == 0) {
+                    listItems[i].style.color = "grey";
+                }
+            }
+        }
+        document.getElementById("btn-4").addEventListener("click", changeListItems);
     })();
 </script>
 </body>
