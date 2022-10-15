@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="test">Main Header</h1>
+<button id="test_btn">Change Main Header</button>
+<script>
+    (function () {
+        let test = document.getElementById("test");
+        let changeMainHeader = function() {
+            test.style.color = "red";
+        }
+        document.getElementById("test_btn").addEventListener("click", changeMainHeader);
+
+    }());
+</script>
+</body>
+</html>
