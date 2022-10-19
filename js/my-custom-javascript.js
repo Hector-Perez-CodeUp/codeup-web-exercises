@@ -25,5 +25,25 @@ $(".poster").css("height", "200px");
 // let title = $("#title").html();
 // alert(title);
 
+
 // Multiple Selectors
-$("h1, p, li").css("background-color", "red");
+// $("h1, p, li").css("background-color", "red");
+
+
+//Mouse Events
+$("h1").click(function() {
+    $(this).css("background-color", "red");
+});
+
+$("p").dblclick(function() {
+    $(this).css("font-size", "18px");
+})
+
+$("li").hover(
+    function() {
+        $(this).css("color", "red");
+    },
+    function() {
+        $(this).css("color", "black");
+    }
+)
