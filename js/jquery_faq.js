@@ -5,3 +5,7 @@ $("dd").addClass("invisible");
 $("#toggle").click(function(e) {
     $("dd").toggleClass("invisible");
 })
+
+$("dt").click(function() {
+    $(this).css("background-color", "yellow");
+});
