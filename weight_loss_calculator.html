@@ -95,75 +95,8 @@
         </div>
     </div>
 </div> <!-- Container Closing Tag -->
-
-<!--Data Gathering-->
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="js/weight_loss_calculator.js"></script>
-<script>
-    (function() {
-        "use strict";
-        // Assigning Variables
-        // let c_weight = document.getElementById("currentWeight").innerText;
-        // let g_weight = document.getElementById("goalWeight").innerText;
-        // let weight_deficit = c_weight - g_weight;
-
-        // Return Results Function
-        let returnResults = function() {
-            // Remove Original Container
-            document.getElementById("bootstrap-div").style.display = "none";
-
-            // Create Results Container
-            let resultsDiv = document.createElement("div");
-            resultsDiv.setAttribute("id", "results-div");
-            resultsDiv.classList.add("container", "my-5");
-            document.body.append(resultsDiv);
-
-            // Create Card Div
-            let resultsCard = document.createElement("div");
-            resultsCard.setAttribute("id", "results-card");
-            resultsCard.style.width = "22em";
-            resultsCard.style.height = "22em";  // temporary, need to delete when card content entered
-            resultsCard.classList.add("card", "d-flex", "justify-contents-center", "align-items-center", "m-auto", "mt-5em")
-            document.body.append(resultsCard);
-
-            // Nest Card Div In Results Container
-            resultsDiv.innerHTMl = resultsCard;
-
-            // Create Card Img
-            let cardPic =
-
-
-            // Recreate this div:
-            // <div id="bootstrap-div" className="container my-5">
-            //     <div id="input-card" className="card d-flex justify-contents-center align-items-center m-auto mt-5em"
-            //          style="width: 22em;">
-            //         <img src="img/scale.jpeg" className="card-img-top" alt="scale-img">
-            //             <div className="card-body d-flex flex-column justify-content-center">
-            //                 <h5 id="card-title" className="card-title m-auto">Weight Loss Calculator</h5>
-
-            // Assign all card classes  --  document.getElementById("MyElement").classList.add('MyClass');
-
-            // RESULTS DATA
-            // Create h1    --  <h1>Mild Weight Loss</h1>
-            // Create p --  <p>Losing 1 lb per week, you should reach your goal in + weight_defecit</p>
-            // Create p --  You would have to maintain around "" calories per day
-            // Create h1    --  <h1>Moderate Weight Loss</h1>
-            // Create p --  Losing 2 lb per week, you should reach your goal in ""
-            // Create p --  You would have to maintain around "" calories per day
-
-            // Create button to Macro Calculator    --  Click here to calculate your estimated macros to help get you there!
-            // Create h1    --  Good luck!
-        }
-        document.getElementById("btn-1").addEventListener("click", returnResults);
-    }());
-
-        // Formulas
-        // let time_to_goal = weight_deficit / 2; // rate of 2lb lbs per week
-        // let weight_kg = c_weight * .453592;  // lbs to kg
-        // let bmr = ((10 * weight_kg) + (6.25 * height) - (5 * age));
-        // let bmr_male = (bmr + 5);
-        // let bmr_female = (bmr - 161);
-</script>
 </body>
 </html>
