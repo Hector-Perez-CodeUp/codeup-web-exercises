@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+
+
+
+
+<div id='map' style='width: 100%; height: 540px;'></div>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
+
+<script>
+  //  Setting Map
+  mapboxgl.accessToken = 'pk.eyJ1IjoiaGVjdG9ycDEwNjYiLCJhIjoiY2w5bXliMjIwMDJpbzN2cWc1dmk4cGFqNSJ9.DVfehvy1pcs-0SleLDtVCQ';
+  var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v9',
+      zoom: 16,
+      center: [-121.29872, 37.8113]
+  });
+
+
+  // Restaurants Array
+  let restaurants = [
+      {
+          title: "Chipotle",
+          address: "16542 Golden Vly Pkwy, Lathrop, CA 95330",
+      },
+      {
+          title: "Starbucks",
+          address: "16538 Golden Vly Pkwy, Lathrop, CA 95330",
+      },
+      {
+          title: "In-N-Out",
+          address: "16514 Golden Vly Pkwy, Lathrop, CA 95330",
+      }
+  ]
+
+
+  // Setting Marker on Each Restaurant
+  restaurants.forEach(function(restaurant) {
+      geocode(restaurant.address, 'pk.eyJ1IjoiaGVjdG9ycDEwNjYiLCJhIjoiY2w5bXliMjIwMDJpbzN2cWc1dmk4cGFqNSJ9.DVfehvy1pcs-0SleLDtVCQ').then(function(coor) {
+          var marker = new mapboxgl.Marker({
+          })
+              .setLngLat(coor)
+              .addTo(map);
+
+          var popUp = new mapboxgl.Popup()
+              .setHTML(`<p>${restaurant.title}</p>`)
+          marker.setPopup(popUp)
+      });
+  });
+
+</script>
+</body>
+</html>
