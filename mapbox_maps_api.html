@@ -8,22 +8,53 @@
 </head>
 <body>
 
+<form>
+    <label for="userAddress">Input an address:</label>
+    <input type="text" id="userAddress" name="userAddress" placeholder="# st, City, STATE, Zip">
+    <input type="submit" id="submit">
+</form>
 
+<label for="zoom">Choose Zoom:</label>
+<select name="zoom" id="zoom">
+    <option value="5">5</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+</select>
 
+<div id='map' style='width: 100%; height: 400px;'>
+</div>
 
-<div id='map' style='width: 100%; height: 540px;'></div>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
 <script>
-  //  Setting Map
-  mapboxgl.accessToken = 'pk.eyJ1IjoiaGVjdG9ycDEwNjYiLCJhIjoiY2w5bXliMjIwMDJpbzN2cWc1dmk4cGFqNSJ9.DVfehvy1pcs-0SleLDtVCQ';
-  var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v9',
-      zoom: 16,
-      center: [-121.29872, 37.8113]
-  });
+    let zoom = document.getElementById("zoom");
+    inputAddress = document.getElementById("userAddress");
+
+    //  Setting Initial Map
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaGVjdG9ycDEwNjYiLCJhIjoiY2w5bXliMjIwMDJpbzN2cWc1dmk4cGFqNSJ9.DVfehvy1pcs-0SleLDtVCQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: zoom.value,
+        center: [-121.29872, 37.8113]
+    });
+
+
+    // User Address Input, Center Map, and Marker
+    $("#submit").click(function(e) {
+        e.preventDefault();
+        geocode(inputAddress.value, 'pk.eyJ1IjoiaGVjdG9ycDEwNjYiLCJhIjoiY2w5bXliMjIwMDJpbzN2cWc1dmk4cGFqNSJ9.DVfehvy1pcs-0SleLDtVCQ').then(function(coor) {
+            console.log(coor);
+            var marker = new mapboxgl.Marker({})
+                .setLngLat(coor)
+                .addTo(map);
+            map.flyTo({center: coor});
+        });
+    })
+
+
 
 
   // Restaurants Array
@@ -31,14 +62,20 @@
       {
           title: "Chipotle",
           address: "16542 Golden Vly Pkwy, Lathrop, CA 95330",
+          favDish: "Favorite Dish:  Burrito Bowl",
+          logo: "img/Chipotle-logo.png"
       },
       {
           title: "Starbucks",
           address: "16538 Golden Vly Pkwy, Lathrop, CA 95330",
+          favDish: "Favorite Dish:  Grilled Cheese",
+          logo: "img/starbucks.png"
       },
       {
           title: "In-N-Out",
           address: "16514 Golden Vly Pkwy, Lathrop, CA 95330",
+          favDish: "Favorite Dish:  Double Double",
+          logo: "img/innout.webp"
       }
   ]
 
@@ -52,7 +89,7 @@
               .addTo(map);
 
           var popUp = new mapboxgl.Popup()
-              .setHTML(`<p>${restaurant.title}</p>`)
+              .setHTML(`<p>${restaurant.title}</p><p>${restaurant.favDish}</p><img src="${restaurant.logo}">`)
           marker.setPopup(popUp)
       });
   });
