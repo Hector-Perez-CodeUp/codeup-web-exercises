@@ -27,23 +27,19 @@
     </div>
 </nav>
 
-
-<!-- Gameboy 5-Day Forecast -->
-<div id="pokedex"> <!-- todo: use flexbox -->
-    <div id="pokedex-top">
-
-    </div>
-    <div id="pokedex-middle">
-
-    </div>
-    <div id="pokedex-bottom">
-
-    </div>
-</div>
-
+<!-- Main -->
+<!-- todo: make option to choose your gameboy color -->
 <div class="container">
     <div class="row">
-        <div id="gameboy" class="col-12 col-md-3 p-0 rounded">
+        <div id="gameboy" class="col-12 col-md-3 p-0 rounded border border-5 border-dark">
+            <div id="powerlight" class="circle border-0 mt-1 m-1 p-0"></div>
+            <div id="cross-container">
+                <div id="cross"></div>
+            </div>
+            <div id="circle-container" style="height: 0%; width: 0%;">
+                <div id="left-circle" class="circle"></div>
+                <div id="right-circle" class="circle"></div>
+            </div>
             <div id="card-box"></div>
         </div>
         <div id='map' class="col-12 col-md-9" style='width: 40em; height: 30em;'></div>
@@ -87,59 +83,59 @@
                 console.log(data)
                 // Create Forecast Cards
                 $("#card-box").html(`
-        <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt}</div>
-            <div class="card-body">
-                <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
-                <p>Description:  ${data.list[4].weather[0].description}</p>
-                <p>Humidity:  ${data.list[4].main.humidity}%</p>
-                <p>Wind:  ${data.list[4].wind.speed} mph</p>
-                <p>Pressure:  ${data.list[4].main.pressure}</p>
-            </div>
-            <div class="progress bg-dark rounded-0">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div><br>
-        <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt}</div>
-            <div class="card-body">
-                <p>Temp:  ${data.list[12].main.temp}&#176;</p>
-                <p>Description:  ${data.list[12].weather[0].description}</p>
-                <p>Humidity:  ${data.list[12].main.humidity}%</p>
-                <p>Wind:  ${data.list[12].wind.speed} mph</p>
-                <p>Pressure:  ${data.list[12].main.pressure}</p>
-            </div>
-            <div class="progress bg-dark rounded-0">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div><br>
-        <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt}</div>
-            <div class="card-body">
-                <p>Temp:  ${data.list[20].main.temp}&#176;</p>
-                <p>Description:  ${data.list[20].weather[0].description}</p>
-                <p>Humidity:  ${data.list[20].main.humidity}%</p>
-                <p>Wind:  ${data.list[20].wind.speed} mph</p>
-                <p>Pressure:  ${data.list[20].main.pressure}</p>
-            </div>
-            <div class="progress bg-dark rounded-0">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div><br>
-        <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt}</div>
-            <div class="card-body">
-                <p>Temp:  ${data.list[28].main.temp}&#176;</p>
-                <p>Description:  ${data.list[28].weather[0].description}</p>
-                <p>Humidity:  ${data.list[28].main.humidity}%</p>
-                <p>Wind:  ${data.list[28].wind.speed} mph</p>
-                <p>Pressure:  ${data.list[28].main.pressure}</p>
-            </div>
-            <div class="progress bg-dark rounded-0">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div><br>
-        <div class="card border border-5 border-dark">
+                    <div class="card border border-5 border-dark">
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt}</div>
+                        <div class="card-body">
+                            <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
+                            <p>Description:  ${data.list[4].weather[0].description}</p>
+                            <p>Humidity:  ${data.list[4].main.humidity}%</p>
+                            <p>Wind:  ${data.list[4].wind.speed} mph</p>
+                            <p>Pressure:  ${data.list[4].main.pressure}</p>
+                        </div>
+                        <div class="progress bg-dark rounded-0">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div><br>
+                    <div class="card border border-5 border-dark d-none">
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt}</div>
+                        <div class="card-body">
+                            <p>Temp:  ${data.list[12].main.temp}&#176;</p>
+                            <p>Description:  ${data.list[12].weather[0].description}</p>
+                            <p>Humidity:  ${data.list[12].main.humidity}%</p>
+                            <p>Wind:  ${data.list[12].wind.speed} mph</p>
+                            <p>Pressure:  ${data.list[12].main.pressure}</p>
+                        </div>
+                        <div class="progress bg-dark rounded-0">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div><br>
+                    <div class="card border border-5 border-dark d-none">
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt}</div>
+                        <div class="card-body">
+                            <p>Temp:  ${data.list[20].main.temp}&#176;</p>
+                            <p>Description:  ${data.list[20].weather[0].description}</p>
+                            <p>Humidity:  ${data.list[20].main.humidity}%</p>
+                            <p>Wind:  ${data.list[20].wind.speed} mph</p>
+                            <p>Pressure:  ${data.list[20].main.pressure}</p>
+                        </div>
+                        <div class="progress bg-dark rounded-0">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div><br>
+                    <div class="card border border-5 border-dark d-none">
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt}</div>
+                        <div class="card-body">
+                            <p>Temp:  ${data.list[28].main.temp}&#176;</p>
+                            <p>Description:  ${data.list[28].weather[0].description}</p>
+                            <p>Humidity:  ${data.list[28].main.humidity}%</p>
+                            <p>Wind:  ${data.list[28].wind.speed} mph</p>
+                            <p>Pressure:  ${data.list[28].main.pressure}</p>
+                        </div>
+                        <div class="progress bg-dark rounded-0">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div><br>
+                    <div class="card border border-5 border-dark d-none">
             <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[36].main.temp}&#176;</p>
@@ -151,9 +147,10 @@
             <div class="progress bg-dark rounded-0">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-        </div>`);
+        </div>
+                `);
             })
-        })
+    })
 
 
     // Address Search
@@ -170,59 +167,59 @@
             }).done(function(data) {
                 // Create Forecast Cards
                 $("#card-box").html(`
-        <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt}</div>
-            <div class="card-body">
-                <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
-                <p>Description:  ${data.list[4].weather[0].description}</p>
-                <p>Humidity:  ${data.list[4].main.humidity}%</p>
-                <p>Wind:  ${data.list[4].wind.speed} mph</p>
-                <p>Pressure:  ${data.list[4].main.pressure}</p>
-            </div>
-            <div class="progress bg-dark rounded-0">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div><br>
-        <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt}</div>
-            <div class="card-body">
-                <p>Temp:  ${data.list[12].main.temp}&#176;</p>
-                <p>Description:  ${data.list[12].weather[0].description}</p>
-                <p>Humidity:  ${data.list[12].main.humidity}%</p>
-                <p>Wind:  ${data.list[12].wind.speed} mph</p>
-                <p>Pressure:  ${data.list[12].main.pressure}</p>
-            </div>
-            <div class="progress bg-dark rounded-0">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div><br>
-        <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt}</div>
-            <div class="card-body">
-                <p>Temp:  ${data.list[20].main.temp}&#176;</p>
-                <p>Description:  ${data.list[20].weather[0].description}</p>
-                <p>Humidity:  ${data.list[20].main.humidity}%</p>
-                <p>Wind:  ${data.list[20].wind.speed} mph</p>
-                <p>Pressure:  ${data.list[20].main.pressure}</p>
-            </div>
-            <div class="progress bg-dark rounded-0">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div><br>
-        <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt}</div>
-            <div class="card-body">
-                <p>Temp:  ${data.list[28].main.temp}&#176;</p>
-                <p>Description:  ${data.list[28].weather[0].description}</p>
-                <p>Humidity:  ${data.list[28].main.humidity}%</p>
-                <p>Wind:  ${data.list[28].wind.speed} mph</p>
-                <p>Pressure:  ${data.list[28].main.pressure}</p>
-            </div>
-            <div class="progress bg-dark rounded-0">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div><br>
-        <div class="card border border-5 border-dark">
+                    <div class="card border border-5 border-dark">
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt}</div>
+                        <div class="card-body">
+                            <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
+                            <p>Description:  ${data.list[4].weather[0].description}</p>
+                            <p>Humidity:  ${data.list[4].main.humidity}%</p>
+                            <p>Wind:  ${data.list[4].wind.speed} mph</p>
+                            <p>Pressure:  ${data.list[4].main.pressure}</p>
+                        </div>
+                        <div class="progress bg-dark rounded-0">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div><br>
+                    <div class="card border border-5 border-dark">
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt}</div>
+                        <div class="card-body">
+                            <p>Temp:  ${data.list[12].main.temp}&#176;</p>
+                            <p>Description:  ${data.list[12].weather[0].description}</p>
+                            <p>Humidity:  ${data.list[12].main.humidity}%</p>
+                            <p>Wind:  ${data.list[12].wind.speed} mph</p>
+                            <p>Pressure:  ${data.list[12].main.pressure}</p>
+                        </div>
+                        <div class="progress bg-dark rounded-0">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div><br>
+                    <div class="card border border-5 border-dark">
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt}</div>
+                        <div class="card-body">
+                            <p>Temp:  ${data.list[20].main.temp}&#176;</p>
+                            <p>Description:  ${data.list[20].weather[0].description}</p>
+                            <p>Humidity:  ${data.list[20].main.humidity}%</p>
+                            <p>Wind:  ${data.list[20].wind.speed} mph</p>
+                            <p>Pressure:  ${data.list[20].main.pressure}</p>
+                        </div>
+                        <div class="progress bg-dark rounded-0">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div><br>
+                    <div class="card border border-5 border-dark">
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt}</div>
+                        <div class="card-body">
+                            <p>Temp:  ${data.list[28].main.temp}&#176;</p>
+                            <p>Description:  ${data.list[28].weather[0].description}</p>
+                            <p>Humidity:  ${data.list[28].main.humidity}%</p>
+                            <p>Wind:  ${data.list[28].wind.speed} mph</p>
+                            <p>Pressure:  ${data.list[28].main.pressure}</p>
+                        </div>
+                        <div class="progress bg-dark rounded-0">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div><br>
+                    <div class="card border border-5 border-dark">
             <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[36].main.temp}&#176;</p>
