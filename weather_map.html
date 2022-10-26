@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!-- Bootstrap CDN -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- MapBox CSS -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,14 +18,15 @@
 <body>
 <nav class="navbar bg-light border-bottom">
     <div class="container-fluid">
-        <img id="logo" src="img/pokemaps.png">
+<!--        <img id="logo" src="img/pokemaps.png">-->
         <p id="currentCity" class="m-0 fst-italic">Current Region: Lathrop, CA</p>
-        <form class="d-flex " role="search">
-            <input class="form-control me-2" type="search" aria-label="Search">
-            <button class="btn btn-outline-dark text-warning" type="submit">Search</button>
+        <form class="d-flex" role="search">
+            <input id="searchString" class="form-control me-2" type="search" aria-label="Search">
+            <button id="search-btn" class="btn btn-outline-dark text-warning" type="submit">Search</button>
         </form>
     </div>
 </nav>
+
 
 <!-- Gameboy 5-Day Forecast -->
 <div id="pokedex"> <!-- todo: use flexbox -->
@@ -40,14 +43,12 @@
 
 <div class="container">
     <div class="row">
-        <div id="gameboy" class="col-3 p-0 rounded">
+        <div id="gameboy" class="col-12 col-md-3 p-0 rounded">
             <div id="card-box"></div>
         </div>
-        <div id='map' class="col-9" style='width: 650px; height: 420px;'></div>
+        <div id='map' class="col-12 col-md-9" style='width: 40em; height: 30em;'></div>
     </div>
 </div>
-
-
 
 <!-- Mapbox CDN -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
@@ -66,34 +67,25 @@
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v9',
         zoom: 15,
-        center: [-121.29872, 37.8113]
+        center: [-86.041917, 33.954820]
     });
-    // 5-Day Forecast
-    // let forecastIndexArray = [4, 12, 20, 28, 34];
-
-    // for(let i = 4; i < 37; i += 8) {
-    //     $("#card-box").html(`
-    //     <div className="card">
-    //         <div className="card-header">${data.list[i].dt_txt}</div>
-    //         <div className="card-body">
-    //             <p>Temp: ${data.list[i].main.temp}</p>
-    //             <p>Description: ${data.list[i].weather[0].description}</p>
-    //             <p>Humidity: ${data.list[i].main.humidity}</p>
-    //             <p>Wind: ${data.list[i].wind.speed}</p>
-    //             <p>Pressure: ${data.list[i].main.pressure}</p>
-    //         </div>
-    //     </div>
-    // `}
 
 
-    // Forecast Weather
-    $.get("http://api.openweathermap.org/data/2.5/forecast", {
-        APPID: OPEN_WEATHER_APPID,
-        q: "Lathrop, US",
-        units: "imperial"
-    }).done(function(data) {
-        // Create Forecast Cards
-        $("#card-box").html(`
+    map.on("click", (e) => {
+        // Add Marker On Click
+        var marker = new mapboxgl.Marker({})
+            .setLngLat(e.lngLat)
+            .addTo(map);
+
+            // Update Forecast On Clicked Location
+            $.get("http://api.openweathermap.org/data/2.5/forecast", {
+                APPID: OPEN_WEATHER_APPID,
+                lat: Math.round(e.lngLat[1]),
+                lon: Math.round(e.lngLat[0]),
+                units: "imperial"
+            }).done(function(data) {
+                // Create Forecast Cards
+                $("#card-box").html(`
         <div class="card border border-5 border-dark">
             <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt}</div>
             <div class="card-body">
@@ -107,7 +99,7 @@
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div><br>
-        <div class="card border border-5 border-dark d-none">
+        <div class="card border border-5 border-dark">
             <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[12].main.temp}&#176;</p>
@@ -120,7 +112,7 @@
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div><br>
-        <div class="card border border-5 border-dark d-none">
+        <div class="card border border-5 border-dark">
             <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[20].main.temp}&#176;</p>
@@ -133,7 +125,7 @@
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div><br>
-        <div class="card border border-5 border-dark d-none">
+        <div class="card border border-5 border-dark">
             <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[28].main.temp}&#176;</p>
@@ -146,7 +138,7 @@
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div><br>
-        <div class="card border border-5 border-dark d-none">
+        <div class="card border border-5 border-dark">
             <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[36].main.temp}&#176;</p>
@@ -159,7 +151,91 @@
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>`);
+            })
     })
+
+
+    $("#search-btn").click(function(e) {
+        e.preventDefault();
+        let userInput = document.getElementById("searchString").value;
+        geocode(userInput, 'pk.eyJ1IjoiaGVjdG9ycDEwNjYiLCJhIjoiY2w5bXliMjIwMDJpbzN2cWc1dmk4cGFqNSJ9.DVfehvy1pcs-0SleLDtVCQ').then(function(coor) {
+            map.flyTo({center: coor});
+            $.get("http://api.openweathermap.org/data/2.5/forecast", {
+                APPID: OPEN_WEATHER_APPID,
+                lat: coor[1],
+                lon: coor[0],
+                units: "imperial"
+            }).done(function(data) {
+                // Create Forecast Cards
+                $("#card-box").html(`
+        <div class="card border border-5 border-dark">
+            <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt}</div>
+            <div class="card-body">
+                <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
+                <p>Description:  ${data.list[4].weather[0].description}</p>
+                <p>Humidity:  ${data.list[4].main.humidity}%</p>
+                <p>Wind:  ${data.list[4].wind.speed} mph</p>
+                <p>Pressure:  ${data.list[4].main.pressure}</p>
+            </div>
+            <div class="progress bg-dark rounded-0">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div><br>
+        <div class="card border border-5 border-dark">
+            <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt}</div>
+            <div class="card-body">
+                <p>Temp:  ${data.list[12].main.temp}&#176;</p>
+                <p>Description:  ${data.list[12].weather[0].description}</p>
+                <p>Humidity:  ${data.list[12].main.humidity}%</p>
+                <p>Wind:  ${data.list[12].wind.speed} mph</p>
+                <p>Pressure:  ${data.list[12].main.pressure}</p>
+            </div>
+            <div class="progress bg-dark rounded-0">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div><br>
+        <div class="card border border-5 border-dark">
+            <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt}</div>
+            <div class="card-body">
+                <p>Temp:  ${data.list[20].main.temp}&#176;</p>
+                <p>Description:  ${data.list[20].weather[0].description}</p>
+                <p>Humidity:  ${data.list[20].main.humidity}%</p>
+                <p>Wind:  ${data.list[20].wind.speed} mph</p>
+                <p>Pressure:  ${data.list[20].main.pressure}</p>
+            </div>
+            <div class="progress bg-dark rounded-0">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div><br>
+        <div class="card border border-5 border-dark">
+            <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt}</div>
+            <div class="card-body">
+                <p>Temp:  ${data.list[28].main.temp}&#176;</p>
+                <p>Description:  ${data.list[28].weather[0].description}</p>
+                <p>Humidity:  ${data.list[28].main.humidity}%</p>
+                <p>Wind:  ${data.list[28].wind.speed} mph</p>
+                <p>Pressure:  ${data.list[28].main.pressure}</p>
+            </div>
+            <div class="progress bg-dark rounded-0">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div><br>
+        <div class="card border border-5 border-dark">
+            <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt}</div>
+            <div class="card-body">
+                <p>Temp:  ${data.list[36].main.temp}&#176;</p>
+                <p>Description:  ${data.list[36].weather[0].description}</p>
+                <p>Humidity:  ${data.list[36].main.humidity}%</p>
+                <p>Wind:  ${data.list[36].wind.speed} mph</p>
+                <p>Pressure:  ${data.list[36].main.pressure}</p>
+            </div>
+            <div class="progress bg-dark rounded-0">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>`);
+            })
+
+        })})
 </script>
 </body>
 </html>
