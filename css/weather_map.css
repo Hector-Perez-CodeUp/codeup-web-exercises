@@ -1,0 +1,52 @@
+#card-box {
+    font-family: silkscreen;
+}
+
+.card {
+    background-color: #8bac0f;
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    width: 16em;
+    height: 17em;
+}
+
+.card-body {
+    height: 11em;
+}
+
+#logo {
+    height: 60px;
+}
+
+.btn {
+    background-color: #3c5aa6;
+}
+
+#gameboy {
+    height: 500px;
+    width: 18em;
+    background-color: lightgrey;
+
+}
+
+p {
+    margin: .25em;
+}
+
+#cross {
+    background: black;
+    height: 100px;
+    position: relative;
+    width: 20px;
+}
+
+#cross:after {
+    background: red;
+    content: "";
+    height: 20px;
+    left: -40px;
+    position: absolute;
+    top: 40px;
+    width: 100px;
+}

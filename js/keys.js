@@ -1,0 +1,2 @@
+const OPEN_WEATHER_APPID = "47624e115c5fcc47b675fc7732c0d3ae"
+
