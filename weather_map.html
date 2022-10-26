@@ -18,7 +18,7 @@
 <body>
 <nav class="navbar bg-light border-bottom">
     <div class="container-fluid">
-<!--        <img id="logo" src="img/pokemaps.png">-->
+        <img id="logo" src="img/pokemaps.png">
         <p id="currentCity" class="m-0 fst-italic">Current Region: Lathrop, CA</p>
         <form class="d-flex" role="search">
             <input id="searchString" class="form-control me-2" type="search" aria-label="Search">
@@ -70,20 +70,21 @@
         center: [-86.041917, 33.954820]
     });
 
-
+    // On Click Listener
     map.on("click", (e) => {
         // Add Marker On Click
         var marker = new mapboxgl.Marker({})
             .setLngLat(e.lngLat)
             .addTo(map);
-
             // Update Forecast On Clicked Location
+        console.log(e.lngLat)
             $.get("http://api.openweathermap.org/data/2.5/forecast", {
                 APPID: OPEN_WEATHER_APPID,
-                lat: Math.round(e.lngLat[1]),
-                lon: Math.round(e.lngLat[0]),
+                lat: e.lngLat.lat,
+                lon: e.lngLat.lng,
                 units: "imperial"
             }).done(function(data) {
+                console.log(data)
                 // Create Forecast Cards
                 $("#card-box").html(`
         <div class="card border border-5 border-dark">
@@ -152,9 +153,10 @@
             </div>
         </div>`);
             })
-    })
+        })
 
 
+    // Address Search
     $("#search-btn").click(function(e) {
         e.preventDefault();
         let userInput = document.getElementById("searchString").value;
@@ -234,8 +236,8 @@
             </div>
         </div>`);
             })
-
-        })})
+        })
+    })
 </script>
 </body>
 </html>
