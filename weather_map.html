@@ -31,16 +31,26 @@
 <!-- todo: make option to choose your gameboy color -->
 <div class="container">
     <div class="row">
-        <div id="gameboy" class="col-12 col-md-3 p-0 rounded border border-5 border-dark">
+        <div id="gameboy" class="col-12 col-md-3 p-0 rounded border border-5 border-dark blue">
             <div id="powerlight" class="circle border-0 mt-1 m-1 p-0"></div>
             <div id="cross-container">
                 <div id="cross"></div>
             </div>
             <div id="circle-container" style="height: 0%; width: 0%;">
-                <div id="left-circle" class="circle"></div>
-                <div id="right-circle" class="circle"></div>
+                <button id="left-circle" class="d-flex circle fw-bold text-secondary justify-content-center align-items-center h4">A</button>
+                <button id="right-circle" class="d-flex circle fw-bold text-secondary justify-content-center align-items-center h4">B</button>
             </div>
-            <div id="card-box"></div>
+            <div id="card-box">
+                <div class="card border border-5 border-dark">
+                    <div class="card-header bg-dark text-success rounded-0">5-Day Forecast!</div>
+                    <div class="card-body p-2">
+                        <img src="img/click.svg" class="bit-svg">
+                        <p>Click anywhere on the map. . .</p>
+                        <img src="img/magnifying.svg" class="bit-svg">
+                        <p>Or search a specific region up above!</p>
+                    </div>
+                </div><br>
+            </div>
         </div>
         <div id='map' class="col-12 col-md-9" style='width: 40em; height: 30em;'></div>
     </div>
@@ -66,6 +76,7 @@
         center: [-86.041917, 33.954820]
     });
 
+
     // On Click Listener
     map.on("click", (e) => {
         // Add Marker On Click
@@ -80,11 +91,10 @@
                 lon: e.lngLat.lng,
                 units: "imperial"
             }).done(function(data) {
-                console.log(data)
                 // Create Forecast Cards
                 $("#card-box").html(`
                     <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt}</div>
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
                             <p>Description:  ${data.list[4].weather[0].description}</p>
@@ -97,7 +107,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark d-none">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt}</div>
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[12].main.temp}&#176;</p>
                             <p>Description:  ${data.list[12].weather[0].description}</p>
@@ -110,7 +120,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark d-none">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt}</div>
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[20].main.temp}&#176;</p>
                             <p>Description:  ${data.list[20].weather[0].description}</p>
@@ -123,7 +133,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark d-none">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt}</div>
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[28].main.temp}&#176;</p>
                             <p>Description:  ${data.list[28].weather[0].description}</p>
@@ -136,7 +146,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark d-none">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt}</div>
+            <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt.split(" ")[0]}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[36].main.temp}&#176;</p>
                 <p>Description:  ${data.list[36].weather[0].description}</p>
@@ -168,7 +178,7 @@
                 // Create Forecast Cards
                 $("#card-box").html(`
                     <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt}</div>
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
                             <p>Description:  ${data.list[4].weather[0].description}</p>
@@ -181,7 +191,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt}</div>
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[12].main.temp}&#176;</p>
                             <p>Description:  ${data.list[12].weather[0].description}</p>
@@ -194,7 +204,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt}</div>
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[20].main.temp}&#176;</p>
                             <p>Description:  ${data.list[20].weather[0].description}</p>
@@ -207,7 +217,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt}</div>
+                        <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[28].main.temp}&#176;</p>
                             <p>Description:  ${data.list[28].weather[0].description}</p>
@@ -220,7 +230,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt}</div>
+            <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt.split(" ")[0]}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[36].main.temp}&#176;</p>
                 <p>Description:  ${data.list[36].weather[0].description}</p>

@@ -1,5 +1,15 @@
+body {
+    background-image: url("img/texture-metalic.webp");
+}
+
 #card-box {
     font-family: silkscreen;
+}
+
+.bit-svg {
+    height: 35px;
+    margin: 0;
+    padding: 0;
 }
 
 .card {
@@ -24,7 +34,7 @@
 #gameboy {
     height: 30em;
     width: 18em;
-    background-color: lightgrey;
+    /*background-color: lightgrey;*/
 }
 
 p {
@@ -53,26 +63,26 @@ p {
 #cross-container {
     position: absolute;
     bottom: 60px;
-    left: 108px;
+    left: 120px;
 }
 
 .circle {
     width: 45px;
     height: 45px;
     position: relative;
-    background: rebeccapurple;
+    background: black;
     border: 2px solid black;
     border-radius: 50%;
 }
 
 #left-circle {
     top: 305px;
-    left: 200px;
+    left: 210px;
 }
 
 #right-circle {
-    top: 315px;
-    left: 160px;
+    top: 310px;
+    left: 170px;
 }
 
 #powerlight {
@@ -83,4 +93,58 @@ p {
     border-radius: 50%;
     box-shadow: 0 0 10px 1px red;
     margin-left: 4px;
+}
+
+/*make text inset shadow */
+h4:before {
+    position: absolute;
+    margin: 2px 0 0 2px;
+    content: attr(title);
+    color: #fff;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+button {
+    box-shadow: 0 2px #999;
+}
+
+button:active {
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
+}
+
+.red {
+    background-color: red;
+}
+
+.teal {
+    background-color: teal;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.gold {
+    background-color: goldenrod;
+}
+
+.silver {
+    background-color: silver;
+}
+
+.classic {
+    background-color: lightgrey;
+}
+
+.codeup {
+    background-image: url("img/green.jpeg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 200px;
+    width: 200px;
 }
