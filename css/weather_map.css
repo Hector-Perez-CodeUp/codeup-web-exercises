@@ -1,15 +1,21 @@
 body {
-    background-image: url("img/texture-metalic.webp");
+    /*background-image: url("img/texture-metalic.webp");*/
 }
 
 #card-box {
     font-family: silkscreen;
+    display: grid;
 }
 
 .bit-svg {
-    height: 35px;
+    height: 40px;
     margin: 0;
     padding: 0;
+}
+
+.weather-svg {
+    height: 40px;
+    filter: invert(62%) sepia(10%) saturate(2048%) hue-rotate(71deg) brightness(100%) contrast(90%);
 }
 
 .card {
@@ -17,6 +23,14 @@ body {
     margin-left: .7em;
     width: 16em;
     height: 17em;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.card-header {
+    text-align: center;
+    background-color: black;
+    margin: 0;
 }
 
 .card-body {
@@ -75,12 +89,12 @@ p {
     border-radius: 50%;
 }
 
-#left-circle {
+#a-btn {
     top: 305px;
     left: 210px;
 }
 
-#right-circle {
+#b-btn {
     top: 310px;
     left: 170px;
 }

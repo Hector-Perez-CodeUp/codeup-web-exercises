@@ -31,18 +31,21 @@
 <!-- todo: make option to choose your gameboy color -->
 <div class="container">
     <div class="row">
-        <div id="gameboy" class="col-12 col-md-3 p-0 rounded border border-5 border-dark blue">
+        <div id="gameboy" class="col-12 col-md-3 p-0 rounded border border-5 border-dark teal">
             <div id="powerlight" class="circle border-0 mt-1 m-1 p-0"></div>
             <div id="cross-container">
                 <div id="cross"></div>
             </div>
             <div id="circle-container" style="height: 0%; width: 0%;">
-                <button id="left-circle" class="d-flex circle fw-bold text-secondary justify-content-center align-items-center h4">A</button>
-                <button id="right-circle" class="d-flex circle fw-bold text-secondary justify-content-center align-items-center h4">B</button>
+                <button id="a-btn" class="d-flex circle fw-bold text-secondary justify-content-center align-items-center h4">A</button>
+                <button id="b-btn" class="d-flex circle fw-bold text-secondary justify-content-center align-items-center h4">B</button>
             </div>
             <div id="card-box">
                 <div class="card border border-5 border-dark">
-                    <div class="card-header bg-dark text-success rounded-0">5-Day Forecast!</div>
+                    <div class="card-header text-success rounded-0">
+                        5-Day Forecast!
+                        <img src="img/weather.png" class="weather-svg">
+                    </div>
                     <div class="card-body p-2">
                         <img src="img/click.svg" class="bit-svg">
                         <p>Click anywhere on the map. . .</p>
@@ -94,7 +97,7 @@
                 // Create Forecast Cards
                 $("#card-box").html(`
                     <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt.split(" ")[0]}</div>
+                        <div class="card-header text-success rounded-0">${data.list[4].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
                             <p>Description:  ${data.list[4].weather[0].description}</p>
@@ -107,7 +110,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark d-none">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt.split(" ")[0]}</div>
+                        <div class="card-header text-success rounded-0">${data.list[12].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[12].main.temp}&#176;</p>
                             <p>Description:  ${data.list[12].weather[0].description}</p>
@@ -120,7 +123,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark d-none">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt.split(" ")[0]}</div>
+                        <div class="card-header text-success rounded-0">${data.list[20].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[20].main.temp}&#176;</p>
                             <p>Description:  ${data.list[20].weather[0].description}</p>
@@ -133,7 +136,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark d-none">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt.split(" ")[0]}</div>
+                        <div class="card-header text-success rounded-0">${data.list[28].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[28].main.temp}&#176;</p>
                             <p>Description:  ${data.list[28].weather[0].description}</p>
@@ -146,7 +149,7 @@
                         </div>
                     </div><br>
                     <div class="card border border-5 border-dark d-none">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt.split(" ")[0]}</div>
+            <div class="card-header text-success rounded-0">${data.list[36].dt_txt.split(" ")[0]}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[36].main.temp}&#176;</p>
                 <p>Description:  ${data.list[36].weather[0].description}</p>
@@ -168,6 +171,9 @@
         e.preventDefault();
         let userInput = document.getElementById("searchString").value;
         geocode(userInput, 'pk.eyJ1IjoiaGVjdG9ycDEwNjYiLCJhIjoiY2w5bXliMjIwMDJpbzN2cWc1dmk4cGFqNSJ9.DVfehvy1pcs-0SleLDtVCQ').then(function(coor) {
+            var marker = new mapboxgl.Marker({})
+                .setLngLat(coor)
+                .addTo(map);
             map.flyTo({center: coor});
             $.get("http://api.openweathermap.org/data/2.5/forecast", {
                 APPID: OPEN_WEATHER_APPID,
@@ -178,7 +184,7 @@
                 // Create Forecast Cards
                 $("#card-box").html(`
                     <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[4].dt_txt.split(" ")[0]}</div>
+                        <div class="card-header text-success rounded-0">${data.list[4].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
                             <p>Description:  ${data.list[4].weather[0].description}</p>
@@ -190,8 +196,8 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div><br>
-                    <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[12].dt_txt.split(" ")[0]}</div>
+                    <div class="card border border-5 border-dark d-none">
+                        <div class="card-header text-success rounded-0">${data.list[12].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[12].main.temp}&#176;</p>
                             <p>Description:  ${data.list[12].weather[0].description}</p>
@@ -203,8 +209,8 @@
                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div><br>
-                    <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[20].dt_txt.split(" ")[0]}</div>
+                    <div class="card border border-5 border-dark d-none">
+                        <div class="card-header text-success rounded-0">${data.list[20].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[20].main.temp}&#176;</p>
                             <p>Description:  ${data.list[20].weather[0].description}</p>
@@ -216,8 +222,8 @@
                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div><br>
-                    <div class="card border border-5 border-dark">
-                        <div class="card-header bg-dark text-success rounded-0">${data.list[28].dt_txt.split(" ")[0]}</div>
+                    <div class="card border border-5 border-dark d-none">
+                        <div class="card-header text-success rounded-0">${data.list[28].dt_txt.split(" ")[0]}</div>
                         <div class="card-body">
                             <p>Temp:  ${data.list[28].main.temp}&#176;</p>
                             <p>Description:  ${data.list[28].weather[0].description}</p>
@@ -229,8 +235,8 @@
                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div><br>
-                    <div class="card border border-5 border-dark">
-            <div class="card-header bg-dark text-success rounded-0">${data.list[36].dt_txt.split(" ")[0]}</div>
+                    <div class="card border border-5 border-dark d-none">
+            <div class="card-header text-success rounded-0">${data.list[36].dt_txt.split(" ")[0]}</div>
             <div class="card-body">
                 <p>Temp:  ${data.list[36].main.temp}&#176;</p>
                 <p>Description:  ${data.list[36].weather[0].description}</p>
@@ -245,6 +251,8 @@
             })
         })
     })
+
+
 </script>
 </body>
 </html>
