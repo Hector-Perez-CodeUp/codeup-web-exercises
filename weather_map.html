@@ -2,62 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Weather Map</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <!-- MapBox CSS -->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/weather_map.css">
-
+    <style>
+        body {
+            background-color: dimgrey;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar bg-light border-bottom">
+<nav class="navbar bg-dark bg-gradient border-bottom border-warning">
     <div class="container-fluid">
-        <img id="logo" src="img/pokemaps.png">
-        <p id="currentCity" class="m-0 fst-italic">Gotta Nav 'Em All!</p>
+        <img src="img/pumpkin.svg" style="height: 50px">
         <form class="d-flex" role="search">
-            <input id="searchString" class="form-control me-2" type="search" aria-label="Search">
-            <button id="search-btn" class="btn btn-outline-dark text-warning" type="submit">Search</button>
+            <input id="searchString" class="form-control me-2 bg-dark border border-warning" type="search" aria-label="Search">
+            <button id="search-btn" class="btn btn-outline-warning" type="submit">Search</button>
         </form>
     </div>
 </nav>
-
-<!-- Main -->
-<!-- todo: make option to choose your gameboy color -->
 <div class="container">
-    <div class="row">
-        <div id="gameboy" class="col-12 col-md-3 p-0 rounded border border-5 border-dark teal">
-            <div id="powerlight" class="circle border-0 mt-1 m-1 p-0"></div>
-            <div id="cross-container">
-                <div id="cross"></div>
-            </div>
-            <div id="circle-container" style="height: 0%; width: 0%;">
-                <button id="a-btn" class="d-flex circle fw-bold text-secondary justify-content-center align-items-center h4">A</button>
-                <button id="b-btn" class="d-flex circle fw-bold text-secondary justify-content-center align-items-center h4">B</button>
-            </div>
-            <div id="card-box">
-                <div class="card border border-5 border-dark">
-                    <div class="card-header text-success rounded-0">
-                        5-Day Forecast!
-                        <img src="img/weather.png" class="weather-svg">
-                    </div>
-                    <div class="card-body p-2">
-                        <img src="img/click.svg" class="bit-svg">
-                        <p>Click anywhere on the map. . .</p>
-                        <img src="img/magnifying.svg" class="bit-svg">
-                        <p>Or search a specific region up above!</p>
-                    </div>
-                </div><br>
-            </div>
-        </div>
-        <div id='map' class="" style='width: 55em; height: 40em;'></div>
-    </div>
+    <div id="card-box" class="col-12 d-flex justify-content-between py-3"></div>
+    <div id='map' class="" style='width: 100%; height: 35em;'></div>
 </div>
+
 
 <!-- Mapbox CDN -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
@@ -66,28 +36,26 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <!-- j-Query CDN -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<!-- Custom JS -->
-<script src="js/keys.js"></script>
-
 <script>
-    var currentCard = 0;
 
     //  Setting Initial Map
     mapboxgl.accessToken = 'pk.eyJ1IjoiaGVjdG9ycDEwNjYiLCJhIjoiY2w5bXliMjIwMDJpbzN2cWc1dmk4cGFqNSJ9.DVfehvy1pcs-0SleLDtVCQ';
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
+        style: 'mapbox://styles/mapbox/dark-v10',
         zoom: 15,
         center: [-86.041917, 33.954820]
     });
 
 
-    // Address Search Forecast *Works*
+    // Search Listener
     $("#search-btn").click(function(e) {
         e.preventDefault();
+        const successSound = new Audio("audio/sound-1.mp3");
+        successSound.play();
         let userInput = document.getElementById("searchString").value;
         // Custom Markers
-        let markerString = "img/marker.png";
+        let markerString = "img/balloon-halloween-svgrepo-com.svg";
         let markerContainer = document.createElement('div');
         $(markerContainer).css({
             background: `url(${markerString}) no-repeat`,
@@ -102,76 +70,61 @@
             map.flyTo({center: coor});
             // Forecast for Searched Address
             $.get("http://api.openweathermap.org/data/2.5/forecast", {
-                APPID: OPEN_WEATHER_APPID,
+                APPID: "47624e115c5fcc47b675fc7732c0d3ae",
                 lat: coor[1],
                 lon: coor[0],
                 units: "imperial"
             }).done(function(data) {
                 // Create Forecast Cards
                 $("#card-box").html(`
-                    <div class="card border border-5 border-dark ${currentCard === 0 ? 'd-block': 'd-none'}">
-                        <div class="card-header text-success rounded-0">${data.list[4].dt_txt.split(" ")[0]}</div>
-                        <div class="card-body">
-                            <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
+                    <div class="card d-inline-block col-2 bg-dark">
+                        <div class="card-header text-warning rounded-0 text-center">${data.list[4].dt_txt.split(" ")[0]}</div>
+                        <div class="card-body text-white-50">
+                            <p>Temp:  ${data.list[4].main.temp}&#176;</p>
                             <p>Description:  ${data.list[4].weather[0].description}</p>
                             <p>Humidity:  ${data.list[4].main.humidity}%</p>
                             <p>Wind:  ${data.list[4].wind.speed} mph</p>
                             <p>Pressure:  ${data.list[4].main.pressure}</p>
                         </div>
-                        <div class="progress bg-dark rounded-0">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><br>
-                    <div class="card border border-5 border-dark ${currentCard === 1 ? 'd-block': 'd-none'}">
-                        <div class="card-header text-success rounded-0">${data.list[12].dt_txt.split(" ")[0]}</div>
-                        <div class="card-body">
+                    </div>
+                    <div class="card d-inline-block col-2 bg-dark">
+                        <div class="card-header text-warning rounded-0 text-center">${data.list[12].dt_txt.split(" ")[0]}</div>
+                        <div class="card-body text-white-50">
                             <p>Temp:  ${data.list[12].main.temp}&#176;</p>
                             <p>Description:  ${data.list[12].weather[0].description}</p>
                             <p>Humidity:  ${data.list[12].main.humidity}%</p>
                             <p>Wind:  ${data.list[12].wind.speed} mph</p>
                             <p>Pressure:  ${data.list[12].main.pressure}</p>
                         </div>
-                        <div class="progress bg-dark rounded-0">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><br>
-                    <div class="card border border-5 border-dark ${currentCard === 2 ? 'd-block': 'd-none'}">
-                        <div class="card-header text-success rounded-0">${data.list[20].dt_txt.split(" ")[0]}</div>
-                        <div class="card-body">
+                    </div>
+                    <div class="card d-inline-block col-2 bg-dark">
+                        <div class="card-header text-warning rounded-0 text-center">${data.list[20].dt_txt.split(" ")[0]}</div>
+                        <div class="card-body text-white-50">
                             <p>Temp:  ${data.list[20].main.temp}&#176;</p>
                             <p>Description:  ${data.list[20].weather[0].description}</p>
                             <p>Humidity:  ${data.list[20].main.humidity}%</p>
                             <p>Wind:  ${data.list[20].wind.speed} mph</p>
                             <p>Pressure:  ${data.list[20].main.pressure}</p>
                         </div>
-                        <div class="progress bg-dark rounded-0">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><br>
-                    <div class="card border border-5 border-dark ${currentCard === 3 ? 'd-block': 'd-none'}">
-                        <div class="card-header text-success rounded-0">${data.list[28].dt_txt.split(" ")[0]}</div>
-                        <div class="card-body">
+                    </div>
+                    <div class="card d-inline-block col-2 bg-dark">
+                        <div class="card-header text-warning rounded-0 text-center">${data.list[28].dt_txt.split(" ")[0]}</div>
+                        <div class="card-body text-white-50">
                             <p>Temp:  ${data.list[28].main.temp}&#176;</p>
                             <p>Description:  ${data.list[28].weather[0].description}</p>
                             <p>Humidity:  ${data.list[28].main.humidity}%</p>
                             <p>Wind:  ${data.list[28].wind.speed} mph</p>
                             <p>Pressure:  ${data.list[28].main.pressure}</p>
                         </div>
-                        <div class="progress bg-dark rounded-0">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><br>
-                    <div class="card border border-5 border-dark ${currentCard === 4 ? 'd-block': 'd-none'}">
-                    <div class="card-header text-success rounded-0">${data.list[36].dt_txt.split(" ")[0]}</div>
-                    <div class="card-body">
+                    </div>
+                    <div class="card d-inline-block col-2 bg-dark">
+                    <div class="card-header text-warning rounded-0 text-center">${data.list[36].dt_txt.split(" ")[0]}</div>
+                    <div class="card-body text-white-50">
                         <p>Temp:  ${data.list[36].main.temp}&#176;</p>
                         <p>Description:  ${data.list[36].weather[0].description}</p>
                         <p>Humidity:  ${data.list[36].main.humidity}%</p>
                         <p>Wind:  ${data.list[36].wind.speed} mph</p>
                         <p>Pressure:  ${data.list[36].main.pressure}</p>
-                    </div>
-                    <div class="progress bg-dark rounded-0">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>`);
             })
@@ -179,11 +132,13 @@
     })
 
 
-    // On Click Forecast *Works*
+    // Click Listener
     map.on("click", (e) => {
         e.preventDefault();
+        const successSound = new Audio("audio/zombie.wav");
+        successSound.play();
         // Custom Markers
-        let markerString = "img/marker.png";
+        let markerString = "img/zombie.svg";
         let markerContainer = document.createElement('div');
         $(markerContainer).css({
             background: `url(${markerString}) no-repeat`,
@@ -197,96 +152,66 @@
             .addTo(map);
         // Update Forecast On Clicked Location
         $.get("http://api.openweathermap.org/data/2.5/forecast", {
-            APPID: OPEN_WEATHER_APPID,
+            APPID: "47624e115c5fcc47b675fc7732c0d3ae",
             lat: e.lngLat.lat,
             lon: e.lngLat.lng,
             units: "imperial"
         }).done(function(data) {
             // Create Forecast Cards
             $("#card-box").html(`
-                    <div class="card border border-5 border-dark d-flex ${currentCard === 0 ? 'd-block': 'd-none'}">
-                        <div class="card-header text-success rounded-0">${data.list[4].dt_txt.split(" ")[0]}</div>
-                        <div class="card-body">
+                    <div class="card d-inline-block col-2 bg-dark">
+                        <div class="card-header text-warning rounded-0 text-center">${data.list[4].dt_txt.split(" ")[0]}</div>
+                        <div class="card-body text-white-50">
                             <p>Temp:  ${data.list[4].main.temp}&#176;</p> <!-- todo: change to min / max -->
                             <p>Description:  ${data.list[4].weather[0].description}</p>
                             <p>Humidity:  ${data.list[4].main.humidity}%</p>
                             <p>Wind:  ${data.list[4].wind.speed} mph</p>
                             <p>Pressure:  ${data.list[4].main.pressure}</p>
                         </div>
-                        <div class="progress bg-dark rounded-0">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><br>
-                    <div class="card border border-5 border-dark ${currentCard === 1 ? 'd-block': 'd-none'}">
-                        <div class="card-header text-success rounded-0">${data.list[12].dt_txt.split(" ")[0]}</div>
-                        <div class="card-body">
+
+                    </div>
+                    <div class="card d-inline-block col-2 bg-dark">
+                        <div class="card-header text-warning rounded-0 text-center">${data.list[12].dt_txt.split(" ")[0]}</div>
+                        <div class="card-body text-white-50">
                             <p>Temp:  ${data.list[12].main.temp}&#176;</p>
                             <p>Description:  ${data.list[12].weather[0].description}</p>
                             <p>Humidity:  ${data.list[12].main.humidity}%</p>
                             <p>Wind:  ${data.list[12].wind.speed} mph</p>
                             <p>Pressure:  ${data.list[12].main.pressure}</p>
                         </div>
-                        <div class="progress bg-dark rounded-0">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><br>
-                    <div class="card border border-5 border-dark ${currentCard === 2 ? 'd-block': 'd-none'}">
-                        <div class="card-header text-success rounded-0">${data.list[20].dt_txt.split(" ")[0]}</div>
-                        <div class="card-body">
+                    </div>
+                    <div class="card d-inline-block col-2 bg-dark">
+                        <div class="card-header text-warning rounded-0 text-center">${data.list[20].dt_txt.split(" ")[0]}</div>
+                        <div class="card-body text-white-50">
                             <p>Temp:  ${data.list[20].main.temp}&#176;</p>
                             <p>Description:  ${data.list[20].weather[0].description}</p>
                             <p>Humidity:  ${data.list[20].main.humidity}%</p>
                             <p>Wind:  ${data.list[20].wind.speed} mph</p>
                             <p>Pressure:  ${data.list[20].main.pressure}</p>
                         </div>
-                        <div class="progress bg-dark rounded-0">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><br>
-                    <div class="card border border-5 border-dark ${currentCard === 3 ? 'd-block': 'd-none'}">
-                        <div class="card-header text-success rounded-0">${data.list[28].dt_txt.split(" ")[0]}</div>
-                        <div class="card-body">
+                    </div>
+                    <div class="card d-inline-block col-2 bg-dark">
+                        <div class="card-header text-warning rounded-0 text-center">${data.list[28].dt_txt.split(" ")[0]}</div>
+                        <div class="card-body text-white-50">
                             <p>Temp:  ${data.list[28].main.temp}&#176;</p>
                             <p>Description:  ${data.list[28].weather[0].description}</p>
                             <p>Humidity:  ${data.list[28].main.humidity}%</p>
                             <p>Wind:  ${data.list[28].wind.speed} mph</p>
                             <p>Pressure:  ${data.list[28].main.pressure}</p>
                         </div>
-                        <div class="progress bg-dark rounded-0">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><br>
-                    <div class="card border border-5 border-dark ${currentCard === 4 ? 'd-block': 'd-none'}">
-                    <div class="card-header text-success rounded-0">${data.list[36].dt_txt.split(" ")[0]}</div>
-                    <div class="card-body">
+                    </div>
+                    <div class="card d-inline-block col-2 bg-dark">
+                    <div class="card-header text-warning rounded-0 text-center">${data.list[36].dt_txt.split(" ")[0]}</div>
+                    <div class="card-body text-white-50">
                         <p>Temp:  ${data.list[36].main.temp}&#176;</p>
                         <p>Description:  ${data.list[36].weather[0].description}</p>
                         <p>Humidity:  ${data.list[36].main.humidity}%</p>
                         <p>Wind:  ${data.list[36].wind.speed} mph</p>
                         <p>Pressure:  ${data.list[36].main.pressure}</p>
-                    </div>
-                    <div class="progress bg-dark rounded-0">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
                 </div>`);
         })
     })
 
-
-    // Forward Forecast Button
-    $("#a-btn").click(function(e) {
-        if (currentCard < 5) {
-            currentCard = currentCard + 1;
-        }
-    })
-
-
-    // Backwards Forecast Button
-    $("#b-btn").click(function(e) {
-        if (currentCard < 5) {
-            currentCard = currentCard - 1;
-        }
-    })
 </script>
 </body>
 </html>
