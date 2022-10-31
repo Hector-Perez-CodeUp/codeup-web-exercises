@@ -1,5 +1,4 @@
 body {
-    /*background-image: url("img/texture-metalic.webp");*/
 }
 
 #card-box {
@@ -89,6 +88,10 @@ p {
     border-radius: 50%;
 }
 
+#map {
+    width: 100%;
+}
+
 #a-btn {
     top: 305px;
     left: 210px;
@@ -97,6 +100,16 @@ p {
 #b-btn {
     top: 310px;
     left: 170px;
+}
+
+.progress {
+    position: relative;
+}
+
+.progress-bar {
+    /*position: fixed;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
 }
 
 #powerlight {
@@ -161,4 +174,13 @@ button:active {
     background-size: contain;
     height: 200px;
     width: 200px;
+}
+
+.marker {
+    background-image: url('img/marker.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
 }
