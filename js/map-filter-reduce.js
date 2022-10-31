@@ -43,16 +43,27 @@ var threeLanguages = users.filter(function(person) {
 })
 console.log(threeLanguages)
 
+
 // User Emails Using .map
+var emails = users.map(function(person) {
+    return person.email;
+})
+console.log(emails);
 
 
 // Total Years of Exp using .reduce
+const totalYears = users.reduce((total, person) => {
+    return total + person.yearsOfExperience;
+}, 0);
+console.log(totalYears);
 
 
 // Longest Email Using .reduce
 
 
+
 // All User Names Using .reduce
+
 
 
 // Bonus:  Unique List of Languages Using .reduce
