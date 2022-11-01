@@ -59,11 +59,30 @@ console.log(totalYears);
 
 
 // Longest Email Using .reduce
+const longestEmail = users.reduce((total, person) => {
+    if (total.email.length > person.email.length) {
+        return total
+    } else {
+        return person
+    }
+}).email;
+console.log(longestEmail);
 
 
-
-// All User Names Using .reduce
-
+// All UserNames Using .reduce
+let names = users.reduce(
+    (a, b) => {return a += ` ${b.name}`}, ''
+);
+console.log(names);
 
 
 // Bonus:  Unique List of Languages Using .reduce
+var uniqueLanguages = users.reduce(function(totalLanguages, nextPerson) {
+    nextPerson.languages.forEach(language => {
+        if (!totalLanguages.includes(language)) {
+            totalLanguages.push(language);
+        }
+    })
+    return totalLanguages;
+}, [])
+console.log(uniqueLanguages)
