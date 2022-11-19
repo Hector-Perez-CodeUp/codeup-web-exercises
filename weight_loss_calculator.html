@@ -22,57 +22,52 @@
             <input type="number" id="age" name="age" class="input">
 
             <!-- Height -->
-            <label for="height">Height:</label>
+            <label for="user-height">Height:</label>
             <div class="input-group input">
-                <input type="number" id="height" name="height" class="form-control" aria-label="Text input with dropdown button">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Units</button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">in</a></li>
-                    <li><a class="dropdown-item" href="#">cm</a></li>
-                </ul>
+                <input type="number" id="user-height" name="height" class="form-control">
+                <select id="height-selector" class="form-select align-items-center" aria-label="Default select example">
+                    <option value="in" selected>in</option>
+                    <option value="cm">cm</option>
+                </select>
             </div>
 
             <!-- Current Weight -->
-            <label for="currentWeightInput">Current Weight:</label> <!-- Options for lbs or kgs-->
+            <label for="c_weight_selector">Current Weight:</label>
             <div class="input-group input">
-                <input type="number" id="currentWeightInput" name="currentWeight" class="form-control" aria-label="Text input with dropdown button">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Units</button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">lbs</a></li>
-                    <li><a class="dropdown-item" href="#">kgs</a></li>
-                    <li><a class="dropdown-item" href="#">st</a></li>
-                </ul>
+                <input id="user-current-weight" type="number" name="currentWeight" class="form-control" aria-label="Text input with dropdown button">
+                <select id="c_weight_selector" class="form-select align-items-center">
+                    <option value="lbs" selected>lbs</option>
+                    <option value="kgs">kgs</option>
+                </select>
             </div>
 
             <!-- Goal Weight -->
-            <label for="goalWeight">Goal Weight:</label>
+            <label for="user-goal-weight">Goal Weight:</label>
             <div class="input-group input">
-                <input type="number" id="goalWeight" name="goalWeight" class="form-control" aria-label="Text input with dropdown button">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Units</button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">lbs</a></li>
-                    <li><a class="dropdown-item" href="#">kgs</a></li>
-                    <li><a class="dropdown-item" href="#">st</a></li>
-                </ul>
+                <input id="user-goal-weight" type="number" name="goalWeight" class="form-control" aria-label="Text input with dropdown button">
+                <select id="g_weight_selector" class="form-select align-items-center">
+                    <option value="lbs" selected>lbs</option>
+                    <option value="kgs">kgs</option>
+                </select>
             </div>
 
             <!-- Sex -->
             <label for="sex">Sex:</label>
             <div id="sex">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="male">
+                    <input type="radio" class="form-check-input" name="sex" id="male" value="M" checked>
                     <label class="form-check-label" for="male">
                         Male
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="female" checked>
+                    <input type="radio" class="form-check-input" name="sex" id="female" value="F">
                     <label class="form-check-label" for="female">
                         Female
                     </label>
                 </div>
                 <div class="form-check input">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="undisclosedSex" checked>
+                    <input type="radio" class="form-check-input" name="sex" id="undisclosedSex" value="F">
                     <label class="form-check-label" for="undisclosedSex">
                         Rather Not Answer
                     </label>
@@ -86,12 +81,12 @@
                 <option value="1">1.  Sedentary (little to no exercise + desk job)</option>
                 <option value="2">2.  Lightly Active (light exercise 1-3 days a week)</option>
                 <option value="3">3.  Moderately Active (moderate exercise 3-5 days a week</option>
-                <option value="3">4.  Very Active (heavy exercise 6-7 days a week)</option>
-                <option value="3">5.  Extremely Active (strenuous training 2x a day)</option>
+                <option value="4">4.  Very Active (heavy exercise 6-7 days a week)</option>
+                <option value="5">5.  Extremely Active (strenuous training 2x a day)</option>
             </select>
 
             <!-- Submit Button -->
-            <button id="btn-1">Submit</button>
+            <button id="submit-btn" type="submit">Submit</button>
         </div>
     </div>
 </div> <!-- Container Closing Tag -->
