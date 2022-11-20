@@ -1,4 +1,10 @@
 "use strict";
+
+// todo: on pageLoad - modal with disclaimer
+$(document).ready(function(){
+    $("#myModal").modal('show');
+});
+
 $("#submit-btn").click(function() {
     // USER METRICS //
     let age = document.querySelector("#age").value;
@@ -12,6 +18,7 @@ $("#submit-btn").click(function() {
     let act_lvl = document.querySelector("#activityLevel").value;
 
     // FORMULAS //
+    // Calorie Formulas
     //todo:  verify formulas are accurate
     let weight_kg;
     c_weight_unit == "lbs" ? weight_kg = c_weight_value * .453592 : weight_kg = c_weight_value; // Convert to kgs
@@ -22,10 +29,30 @@ $("#submit-btn").click(function() {
     let bmr_male = (bmr + 5);
     let bmr_female = (bmr - 161);
 
+    // AMDR Formulas
+    //Fat: 20-35%
+    let fat_low_one = Math.floor(tdee - 500) * .2;
+    let fat_low_two = Math.floor(tdee - 1000) * .2;
+    let fat_high_one = Math.floor(tdee - 500) * .35;
+    let fat_high_two = Math.floor(tdee - 1000) * .35;
+
+    //Protein: 10-35%
+    let pro_low_one = Math.floor(tdee - 500) * .1;
+    let pro_low_two = Math.floor(tdee - 1000) * .1;
+    let pro_high_one = Math.floor(tdee - 500) * .35;
+    let pro_high_two = Math.floor(tdee - 1000) * .35;
+
+    //Carbs: 45-65%
+    let carb_low_one = Math.floor(tdee - 500) * .45;
+    let carb_low_two = Math.floor(tdee - 500) * .45;
+    let carb_high_one = Math.floor(tdee - 500) * .65;
+    let carb_high_two = Math.floor(tdee - 500) * .65;
+
+
     // FINAL CALCULATIONS //
     function presentResults(bmrMaleOrFemale, multiplier) {
         let tdee = bmrMaleOrFemale * multiplier;
-        alert(`Losing 1 lb per week, you should reach your goal in ${weight_deficit} weeks!\nYou would need to maintain around ${Math.floor((tdee - 500))} a day.\nLosing 2 lbs per week, you should reach your goal in ${time_to_goal} weeks!\nYou would need to maintain around ${Math.floor((tdee - 1000))} a day.`);
+        document.querySelector("#results-modal").innerHTML = (`Losing 1 lb per week, you should reach your goal in ${weight_deficit} weeks!\nYou would need to maintain around ${Math.floor((tdee - 500))} calories a day.\nLosing 2 lbs per week, you should reach your goal in ${time_to_goal} weeks!\nYou would need to maintain around ${Math.floor((tdee - 1000))} calories a day.`);
     }
     // Male Calculations
     if ( sex == "M" && act_lvl == 1 ) {

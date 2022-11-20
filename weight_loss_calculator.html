@@ -11,6 +11,23 @@
 <body>
 
 <div id="bootstrap-div" class="container my-5">
+
+    <!-- Disclaimer Modal -->
+    <div id="myModal" class="modal fade" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">DISCLAIMER</h5>
+                </div>
+                <div class="modal-body">
+                    <p>The results from this calculator are general guidelines, not prescriptions.  For best results, consult your doctor or a certified fitness professional.</p>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">I understand</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Metrics Card -->
     <div id="input-card" class="card d-flex justify-contents-center align-items-center m-auto mt-5em" style="width: 22em;">
         <img src="img/scale.jpeg" class="card-img-top" alt="scale-img">
         <div class="card-body d-flex flex-column justify-content-center">
@@ -86,7 +103,26 @@
             </select>
 
             <!-- Submit Button -->
-            <button id="submit-btn" type="submit">Submit</button>
+            <button id="submit-btn" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="results-title">Your Results</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="results-modal" class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 </div> <!-- Container Closing Tag -->
