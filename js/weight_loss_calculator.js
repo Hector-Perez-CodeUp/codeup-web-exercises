@@ -1,8 +1,9 @@
 "use strict";
 
-// todo: on pageLoad - modal with disclaimer
+//todo: must refresh if you want to change weight goal
+
 $(document).ready(function(){
-    $("#myModal").modal('show');
+    $("#disclaimer").modal('show');
 });
 
 $("#submit-btn").click(function() {
@@ -19,7 +20,6 @@ $("#submit-btn").click(function() {
 
     // FORMULAS //
     // Calorie Formulas
-    //todo:  verify formulas are accurate
     let weight_kg;
     c_weight_unit == "lbs" ? weight_kg = c_weight_value * .453592 : weight_kg = c_weight_value; // Convert to kgs
     if (height_unit == "in") {height_value *= 2.54;} // Convert to cm
@@ -29,31 +29,80 @@ $("#submit-btn").click(function() {
     let bmr_male = (bmr + 5);
     let bmr_female = (bmr - 161);
 
-    // AMDR Formulas
-    //Fat: 20-35%
-    let fat_low_one = Math.floor(tdee - 500) * .2;
-    let fat_low_two = Math.floor(tdee - 1000) * .2;
-    let fat_high_one = Math.floor(tdee - 500) * .35;
-    let fat_high_two = Math.floor(tdee - 1000) * .35;
-
-    //Protein: 10-35%
-    let pro_low_one = Math.floor(tdee - 500) * .1;
-    let pro_low_two = Math.floor(tdee - 1000) * .1;
-    let pro_high_one = Math.floor(tdee - 500) * .35;
-    let pro_high_two = Math.floor(tdee - 1000) * .35;
-
-    //Carbs: 45-65%
-    let carb_low_one = Math.floor(tdee - 500) * .45;
-    let carb_low_two = Math.floor(tdee - 500) * .45;
-    let carb_high_one = Math.floor(tdee - 500) * .65;
-    let carb_high_two = Math.floor(tdee - 500) * .65;
-
 
     // FINAL CALCULATIONS //
     function presentResults(bmrMaleOrFemale, multiplier) {
         let tdee = bmrMaleOrFemale * multiplier;
-        document.querySelector("#results-modal").innerHTML = (`Losing 1 lb per week, you should reach your goal in ${weight_deficit} weeks!\nYou would need to maintain around ${Math.floor((tdee - 500))} calories a day.\nLosing 2 lbs per week, you should reach your goal in ${time_to_goal} weeks!\nYou would need to maintain around ${Math.floor((tdee - 1000))} calories a day.`);
+
+        // AMDR Formulas
+        //Protein: 10-35%
+        let pro_low_one = Math.floor(((tdee - 500) * .1) / 4);
+        let pro_low_two = Math.floor(((tdee - 1000) * .1) / 4);
+        let pro_high_one = Math.floor(((tdee - 500) * .35) / 4);
+        let pro_high_two = Math.floor(((tdee - 1000) * .35) / 4);
+
+        //Carbs: 45-65%
+        let carb_low_one = Math.floor(((tdee - 500) * .45) / 4);
+        let carb_low_two = Math.floor(((tdee - 1000) * .45) / 4);
+        let carb_high_one = Math.floor(((tdee - 500) * .65) / 4);
+        let carb_high_two = Math.floor(((tdee - 1000) * .65) / 4);
+
+        //Fat: 20-35%
+        let fat_low_one = Math.floor(((tdee - 500) * .2) / 9);
+        let fat_low_two = Math.floor(((tdee - 1000) * .2) / 9);
+        let fat_high_one = Math.floor(((tdee - 500) * .35) / 9);
+        let fat_high_two = Math.floor(((tdee - 1000) * .35) / 9);
+
+        // Mild Loss Results
+        var oneHTML = (`Losing <strong>1 lb per week</strong>, you should reach your goal in <strong>${weight_deficit} weeks!</strong>\nYou would need to maintain around <u>${Math.floor((tdee - 500))} calories</u> a day.<br>`);
+        oneHTML += (`<a href="https://www.weightwatchers.com/us/blog/food/acceptable-macronutrient-distribution-range" target="_blank">Daily Macronutrient Ranges:  </a>`)
+        oneHTML += (`<br><table><tr><th>Macro</th><th>Low End</th><th>High End</th></tr>`)
+        // Protein Results
+        oneHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/proteins" target="_blank">Protein</a></td>`)
+        oneHTML += (`<td>${pro_low_one} grams</td>`)
+        oneHTML += (`<td>${pro_high_one} grams </td></tr>`)
+        // Carb Results
+        oneHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/carbohydrates" target="_blank">Carbs</a></td>`)
+        oneHTML += (`<td>${carb_low_one} grams</td>`)
+        oneHTML += (`<td>${carb_high_one} grams </td>`)
+        // Fat Results
+        oneHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/dietary-fats" target="_blank">Fat</a></td>`)
+        oneHTML += (`<td>${fat_low_one} grams</td>`)
+        oneHTML += (`<td>${fat_high_one} grams </td></table>`)
+        document.querySelector("#one-pound-results").innerHTML = oneHTML;
+
+        // Moderate Loss Results
+        var twoHTML = (`Losing <strong>2 lbs per week</strong>, you should reach your goal in <strong>${time_to_goal} weeks!</strong>\nYou would need to maintain around <u>${Math.floor((tdee - 1000))} calories</u> a day.<br>`)
+        twoHTML += (`<a href="https://www.weightwatchers.com/us/blog/food/acceptable-macronutrient-distribution-range" target="_blank">Daily Macronutrient Ranges:  </a>`)
+        twoHTML += (`<br><table><tr><th>Macro</th><th>Low End</th><th>High End</th></tr>`)
+        // Protein Results
+        twoHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/proteins" target="_blank">Protein</a></td>`)
+        twoHTML += (`<td>${pro_low_two} grams</td>`)
+        twoHTML += (`<td>${pro_high_two} grams </td></tr>`)
+        // Carb Results
+        twoHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/carbohydrates" target="_blank">Carbs</a></td>`)
+        twoHTML += (`<td>${carb_low_two} grams</td>`)
+        twoHTML += (`<td>${carb_high_two} grams </td>`)
+        // Fat Results
+        twoHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/dietary-fats" target="_blank">Fat</a></td>`)
+        twoHTML += (`<td>${fat_low_two} grams</td>`)
+        twoHTML += (`<td>${fat_high_two} grams </td></table>`)
+        document.querySelector("#two-pound-results").innerHTML = twoHTML;
     }
+
+    // Incomplete Data Handling
+    if (age == "") {
+        alert("Please enter your age");
+    } else if (height_value == "") {
+        alert("Please enter your height");
+    } else if (c_weight_value == "") {
+        alert("Please enter your current weight");
+    } else if (g_weight_value == "") {
+        alert("Please enter your goal weight");
+    }else if (act_lvl == "default") {
+        alert("Please select your activity level");
+    }
+
     // Male Calculations
     if ( sex == "M" && act_lvl == 1 ) {
         presentResults(bmr_male, 1.2);
