@@ -55,38 +55,38 @@ $("#submit-btn").click(function() {
 
         // Mild Loss Results
         var oneHTML = (`Losing <strong>1 lb per week</strong>, you should reach your goal in <strong>${weight_deficit} weeks!</strong>\nYou would need to maintain around <u>${Math.floor((tdee - 500))} calories</u> a day.<br>`);
-        oneHTML += (`<a href="https://www.weightwatchers.com/us/blog/food/acceptable-macronutrient-distribution-range" target="_blank">Daily Macronutrient Ranges:  </a>`)
-        oneHTML += (`<br><table><tr><th>Macro</th><th>Low End</th><th>High End</th></tr>`)
+        oneHTML += (`<a class="green" href="https://www.weightwatchers.com/us/blog/food/acceptable-macronutrient-distribution-range" target="_blank">Daily Macronutrient Ranges:  </a>`)
+        oneHTML += (`<br><table class="table table-striped"><thead><tr><th>Macro</th><th>Low End</th><th>High End</th></tr></thead>`)
         // Protein Results
-        oneHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/proteins" target="_blank">Protein</a></td>`)
+        oneHTML += (`<tbody class="table-group-divider"><tr><td><a href="https://www.eufic.org/en/whats-in-food/category/proteins" target="_blank" class="green">Protein</a></td>`)
         oneHTML += (`<td>${pro_low_one} grams</td>`)
         oneHTML += (`<td>${pro_high_one} grams </td></tr>`)
         // Carb Results
-        oneHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/carbohydrates" target="_blank">Carbs</a></td>`)
+        oneHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/carbohydrates" target="_blank" class="green">Carbs</a></td>`)
         oneHTML += (`<td>${carb_low_one} grams</td>`)
         oneHTML += (`<td>${carb_high_one} grams </td>`)
         // Fat Results
-        oneHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/dietary-fats" target="_blank">Fat</a></td>`)
+        oneHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/dietary-fats" target="_blank" class="green">Fat</a></td>`)
         oneHTML += (`<td>${fat_low_one} grams</td>`)
-        oneHTML += (`<td>${fat_high_one} grams </td></table>`)
+        oneHTML += (`<td>${fat_high_one} grams </td></tbody></table>`)
         document.querySelector("#one-pound-results").innerHTML = oneHTML;
 
         // Moderate Loss Results
         var twoHTML = (`Losing <strong>2 lbs per week</strong>, you should reach your goal in <strong>${time_to_goal} weeks!</strong>\nYou would need to maintain around <u>${Math.floor((tdee - 1000))} calories</u> a day.<br>`)
-        twoHTML += (`<a href="https://www.weightwatchers.com/us/blog/food/acceptable-macronutrient-distribution-range" target="_blank">Daily Macronutrient Ranges:  </a>`)
-        twoHTML += (`<br><table><tr><th>Macro</th><th>Low End</th><th>High End</th></tr>`)
+        twoHTML += (`<a class="yellow" href="https://www.weightwatchers.com/us/blog/food/acceptable-macronutrient-distribution-range" target="_blank">Daily Macronutrient Ranges:  </a>`)
+        twoHTML += (`<br><table class="table table-striped"><thead><tr><th>Macro</th><th>Low End</th><th>High End</th></tr></thead>`)
         // Protein Results
-        twoHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/proteins" target="_blank">Protein</a></td>`)
+        twoHTML += (`<tbody><tr><td><a href="https://www.eufic.org/en/whats-in-food/category/proteins" target="_blank" class="yellow">Protein</a></td>`)
         twoHTML += (`<td>${pro_low_two} grams</td>`)
         twoHTML += (`<td>${pro_high_two} grams </td></tr>`)
         // Carb Results
-        twoHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/carbohydrates" target="_blank">Carbs</a></td>`)
+        twoHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/carbohydrates" target="_blank" class="yellow">Carbs</a></td>`)
         twoHTML += (`<td>${carb_low_two} grams</td>`)
         twoHTML += (`<td>${carb_high_two} grams </td>`)
         // Fat Results
-        twoHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/dietary-fats" target="_blank">Fat</a></td>`)
+        twoHTML += (`<tr><td><a href="https://www.eufic.org/en/whats-in-food/category/dietary-fats" target="_blank" class="yellow">Fat</a></td>`)
         twoHTML += (`<td>${fat_low_two} grams</td>`)
-        twoHTML += (`<td>${fat_high_two} grams </td></table>`)
+        twoHTML += (`<td>${fat_high_two} grams </td></tbody></table>`)
         document.querySelector("#two-pound-results").innerHTML = twoHTML;
     }
 
